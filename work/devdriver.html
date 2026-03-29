@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Jimmy Frosting</title>
+
+  <<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #000000;
+      color: #ffffff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      padding-bottom: 60px;
+      padding-left: 10px;
+      padding-right: 100px;
+      box-sizing: border-box;
+    }
+
+    .content-area {
+      margin-left: 100px;
+      text-align: left;
+      margin-top: 100px;
+      max-width: 640px;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .content-area {
+        margin-left: 16px;
+        margin-top: 100px;
+        max-width: 100%;
+      }
+    }
+
+    .content-area p {
+      font-family: "Doto", system-ui;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-box {
+      margin-top: 0.5rem;
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      max-width: none;
+    }
+
+    .project-title {
+      font-family: "Doto", system-ui;
+      font-size: 1.1rem;
+      text-decoration: none;
+      color: #ffffff;
+    }
+
+    .project-title:hover {
+      text-decoration: underline;
+    }
+
+    .project-github {
+      color: #ffffff;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+
+    .project-github:hover {
+      color: #ffd166;
+    }
+
+    footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background: #800020;
+      color: #ffffff;
+      padding: 0.5rem 1.5rem;
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: "Doto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 3.75rem;
+      font-weight: 500;
+    }
+
+    @media (max-width: 600px) {
+      .footer-left {
+        gap: 0.5rem;
+      }
+
+      .footer-left a {
+        font-size: 1.1rem;
+      }
+    }
+
+    .footer-avatar {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #ffffff;
+    }
+
+    .footer-left a {
+      color: #ffe4f0;
+      text-decoration: none;
+      font-size: 1.3rem;
+    }
+
+    .footer-left a:hover {
+      color: #ffffff;
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .footer-logo {
+      height: 32px;
+      width: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section class="content-area">
+      <p>
+        My project is a group‑built USB keyboard Linux device driver written in C, with separate kernel‑space and user‑space components. We implemented a custom character driver under kernel/ that exposes the keyboard data to user space, and a user program under user/ that interacts with the device, plus shell scripts (start.sh, close.sh) to compile, insert/remove the module, and launch the app with the correct privileges. The whole project is designed as a hands‑on exercise in low‑level Linux development, covering kernel modules, device files, and safe communication between kernel and user space.
+      </p>
+
+      <div class="project-box">
+        <a class="project-github"
+           href="https://github.com/Slynxh07/Device-Driver"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="View device driver on GitHub">
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-left">
+      <a href="/" aria-label="Back to homepage">
+        <img src="/images/me.png" alt="Jimmy Frosting" class="footer-avatar">
+      </a>
+
+      <a href="mailto:contact@jimmyfrosting.com" aria-label="Email">
+        <i class="fa-solid fa-envelope"></i>
+      </a>
+
+      <a href="https://www.linkedin.com/in/james-david-frosting/"
+         target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+
+      <a href="https://www.instagram.com/jimmy_frosti/"
+         target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+
+      <a href="https://github.com/jimmy-d-f"
+         target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
+
+      <a href="https://wa.me/353896169208"
+         target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+      </a>
+    </div>
+
+    <div class="footer-right">
+      <img src="/images/logo.png" alt="Jimmy Frosting logo" class="footer-logo">
+    </div>
+  </footer>
+
+  <script src="/scripts/typewriter.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      // apply to this page’s main text
+      runTypewriter('.content-area p', { speed: 18, stagger: 0 });
+    });
+  </script>
+</body>
+</html>

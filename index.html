@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Black Site</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Jacquard+12+Charted&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #000000;
+      color: #ffffff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      padding-bottom: 60px;
+      padding-left: 10px;
+      padding-right: 100px;
+      box-sizing: border-box;
+    }
+
+    /* Top-left title + slogan */
+    .site-header {
+      margin-top: 100px;
+      margin-left: 100px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .site-title {
+      font-family: "Jacquard 12", system-ui;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 2.1rem;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      opacity: 1;
+      pointer-events: auto;
+      cursor: pointer;          /* so it feels hoverable */
+      transition: color 0.2s;
+    }
+
+    .site-title .big-letter {
+      font-size: 1.5em;
+      line-height: 1;
+    }
+
+    .site-slogan {
+      font-family: "Jacquard 12 Charted";
+      font-size: 1.4rem;
+      opacity: 1;
+      max-width: 380px;
+      pointer-events: auto;
+    }
+
+    .content-area {
+      margin-left: 100px;
+      text-align: left;
+      margin-top: 100px;
+      max-width: 640px;
+    }
+
+    .wrapper {
+      max-width: 480px;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .site-header {
+        margin-left: 16px;
+        margin-top: 40px;
+      }
+
+      .content-area {
+        margin-left: 16px;
+        margin-top: 100px;
+        max-width: 100%;
+      }
+    }
+
+    h1,
+    h2,
+    p {
+      font-family: "Jacquard 12", system-ui;
+      font-size: 2.5rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      font-size: 1rem;
+      opacity: 0.8;
+      margin: 0 auto 1.5rem;
+    }
+
+    a.button {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      border-radius: 999px;
+      border: 1px solid #ffffff;
+      color: #000000;
+      background: #ffffff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    a.button:hover {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    .content-area h2 {
+      font-family: "Jacquard 12", system-ui;
+      font-size: 1.8rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .content-area p {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero .content-area + .content-area {
+      margin-top: 40px; /* tweak this value */
+    }
+
+    footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background: #800020;
+      color: #ffffff;
+      padding: 0.5rem 1.5rem;
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: "Jacquard 12", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 3.75rem;
+      font-weight: 500;
+    }
+
+    @media (max-width: 600px) {
+      .footer-left {
+        gap: 0.5rem;
+      }
+
+      .footer-left a {
+        font-size: 1.1rem;
+      }
+    }
+
+    .footer-avatar {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #ffffff;
+    }
+
+    .footer-left a {
+      color: #ffe4f0;
+      text-decoration: none;
+      font-size: 1.3rem;
+    }
+
+    .footer-left a:hover {
+      color: #ffffff;
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .footer-logo {
+      height: 32px;
+      width: auto;
+    }
+
+    .projects-row {
+      display: flex;
+      flex-wrap: wrap;         /* allow multiple rows on small screens */
+      gap: 1.5rem;             /* horizontal AND vertical space between projects */
+    }
+
+    .project-box {
+      display: inline-flex;    /* title + icon stay on one line */
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0;               /* gap handles spacing now */
+    }
+
+    .project-title {
+      font-family: "Jacquard 12", system-ui;
+      font-size: 1.1rem;
+      text-decoration: none;
+      color: #ffffff;
+    }
+
+    .project-title:hover {
+      text-decoration: underline;
+    }
+
+    .project-github {
+      color: #ffffff;
+      font-size: 1.5rem; /* GitHub icon size */
+      text-decoration: none;
+    }
+
+    .project-github:hover {
+      color: #ffd166;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Top-left title + slogan -->
+  <header class="site-header">
+    <div class="site-title" id="name">
+      Jimmy Frosting
+    </div>
+    <div class="site-slogan">
+      Building with <span style="color:#ff0000;">love</span> and
+      <span style="color:#ffd166;">curiosity</span>.
+    </div>
+  </header>
+
+  <main class="hero">
+    <section class="content-area">
+      <h2>About me</h2>
+      <p>My name is Jimmy. I am studying software engineering and 
+        I made this website to practice my skills (I am still quite bad). 
+      </p>
+
+      <p>I will post the work and technical projects I do on this website, 
+        along with blogs about things I love. I hope you enjoy!
+      </p>
+    </section>
+
+    <section class="content-area">
+  <h2>Work</h2>
+  <p>Here are the technological projects I have done so far:</p>
+
+  <div class="projects-row">
+    <div class="project-box">
+      <a class="project-title" href="/work/zorc.html">Zork-Game</a>
+      <a class="project-github"
+         href="https://github.com/jimmy-d-f/zorc"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="View ZORC on GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
+    </div>
+
+    <div class="project-box">
+      <a class="project-title" href="/work/sysinfo.html">Sysinfo</a>
+      <a class="project-github"
+         href="https://github.com/anton-exe/sysinfo-ul"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="View Sysinfo on GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
+    </div>
+
+    <div class="project-box">
+      <a class="project-title" href="/work/devdriver.html">Device-Driver</a>
+      <a class="project-github"
+         href="https://github.com/Slynxh07/Device-Driver"
+         target="_blank" rel="noopener noreferrer"
+         aria-label="View device driver on GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
+    </div>
+
+    <!-- more .project-box items -->
+  </div>
+</section>
+
+<section class="content-area">
+      <h2>Blog</h2>
+      <p>Here are some things I have written about:</p>
+
+
+      <div class="projects-row">
+        <div class="project-box">
+          <a class="project-title" href="/blog/whydatabases.html">Databases</a>
+        </div>
+
+        <!-- more .project-box items -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-left">
+      <img src="/images/me.png" alt="Jimmy Frosting" class="footer-avatar">
+
+      <a href="mailto:contact@jimmyfrosting.com" aria-label="Email">
+        <i class="fa-solid fa-envelope"></i>
+      </a>
+
+      <a href="https://www.linkedin.com/in/james-david-frosting/"
+        target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+
+      <a href="https://www.instagram.com/jimmy_frosti/"
+        target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+
+      <a href="https://github.com/jimmy-d-f"
+        target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
+
+      <a href="https://wa.me/353896169208"
+        target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+      </a>
+    </div>
+
+    <div class="footer-right">
+      <img src="/images/logo.png" alt="Jimmy Frosting logo" class="footer-logo">
+    </div>
+  </footer>
+
+  <script>
+    const nameEl = document.getElementById('name');
+    const originalText = nameEl.textContent.trim();
+
+    // helper: random hex colour, always 6 digits
+    function getRandomColor() {
+      return '#' + Math.floor(Math.random() * 16777215)
+        .toString(16)
+        .padStart(6, '0');
+    }
+
+    // build spans once on load
+    function buildSpans() {
+      nameEl.innerHTML = '';
+      for (const ch of originalText) {
+        if (ch === ' ') {
+          nameEl.appendChild(document.createTextNode(' '));
+          continue;
+        }
+        const span = document.createElement('span');
+        span.textContent = ch;
+        if (ch === 'J' || ch === 'F') {
+          span.classList.add('big-letter');
+        }
+        span.style.color = getRandomColor();
+        nameEl.appendChild(span);
+      }
+    }
+
+    buildSpans();
+
+    // on hover: recolour all letter spans
+    nameEl.addEventListener('mouseenter', () => {
+      const spans = nameEl.querySelectorAll('span');
+      spans.forEach(span => {
+        span.style.color = getRandomColor();
+      });
+    });
+
+    // on mouse leave: rebuild with a fresh random set (or you could reset)
+    nameEl.addEventListener('mouseleave', () => {
+      buildSpans();
+    });
+  </script>
+</body>
+</html>

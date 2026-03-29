@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Black Site</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Jacquard+12+Charted&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #000000;
+      color: #ffffff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      padding-bottom: 60px;
+      padding-left: 10px;
+      padding-right: 100px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .blend-text {
+      mix-blend-mode: difference;
+      position: relative;
+      z-index: 2;
+    }
+
+    .site-header {
+      margin-top: 100px;
+      margin-left: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .site-title {
+      font-family: "Jacquard 12", system-ui;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 2.1rem;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      opacity: 1;
+      pointer-events: auto;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .site-title .big-letter {
+      font-size: 1.5em;
+      line-height: 1;
+    }
+
+    .site-slogan {
+      font-family: "Jacquard 12 Charted";
+      font-size: 1.4rem;
+      opacity: 1;
+      max-width: 380px;
+      pointer-events: auto;
+    }
+
+    .content-area {
+      margin-left: 100px;
+      text-align: left;
+      margin-top: 100px;
+      max-width: 640px;
+    }
+
+    .wrapper {
+      max-width: 480px;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .site-header {
+        margin-left: 16px;
+        margin-top: 40px;
+      }
+
+      .content-area {
+        margin-left: 16px;
+        margin-top: 100px;
+        max-width: 100%;
+      }
+    }
+
+    h1,
+    h2,
+    p {
+      font-family: "Doto", system-ui;
+      font-size: 2.5rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      font-size: 1rem;
+      opacity: 0.8;
+      margin: 0 auto 1.5rem;
+    }
+
+    a.button {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      border-radius: 999px;
+      border: 1px solid #ffffff;
+      color: #000000;
+      background: #ffffff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    a.button:hover {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    .content-area h2 {
+      font-family: "Doto", system-ui;
+      font-size: 1.8rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .content-area p {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero .content-area + .content-area {
+      margin-top: 40px;
+    }
+
+    footer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      background: #800020;
+      color: #ffffff;
+      padding: 0.5rem 1.5rem;
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: "Doto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      z-index: 3;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 3.75rem;
+      font-weight: 500;
+    }
+
+    @media (max-width: 600px) {
+      .footer-left {
+        gap: 0.5rem;
+      }
+
+      .footer-left a {
+        font-size: 1.1rem;
+      }
+    }
+
+    .footer-avatar {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #ffffff;
+    }
+
+    .footer-left a {
+      color: #ffe4f0;
+      text-decoration: none;
+      font-size: 1.3rem;
+    }
+
+    .footer-left a:hover {
+      color: #ffffff;
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .footer-logo {
+      height: 32px;
+      width: auto;
+    }
+
+    .projects-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .project-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0;
+    }
+
+    .project-title {
+      font-family: "Doto", system-ui;
+      font-size: 1.1rem;
+      text-decoration: none;
+      color: #ffffff;
+    }
+
+    .project-title:hover {
+      text-decoration: underline;
+    }
+
+    .project-github {
+      color: #ffffff;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+
+    .project-github:hover {
+      color: #ffd166;
+    }
+
+    .white-stripe {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 140vw;
+      height: 25vh;
+      background: #ffffff;
+      transform-origin: center;
+      z-index: 1;
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="white-stripe"></div>
+
+  <div class="blend-text">
+    <header class="site-header">
+      <div class="site-title" id="name">
+        Jimmy Frosting
+      </div>
+      <div class="site-slogan">
+        Building with <span class="love-word" style="background-color:#ff0000;">love</span> and
+        <span class="curiosity-word" style="background-color:#f78400;">curiosity</span>.
+      </div>
+    </header>
+
+    <main class="hero">
+      <section class="content-area">
+        <h2>About me</h2>
+        <p>My name is Jimmy. I am studying software engineering and 
+          I made this website to practice my skills (I am still quite bad). 
+        </p>
+
+        <p>I will post the work and technical projects I do on this website, 
+          along with blogs about things I love. I hope you enjoy!
+        </p>
+      </section>
+
+      <section class="content-area">
+        <h2>Work</h2>
+        <p>Here are the technological projects I have done so far:</p>
+
+        <div class="projects-row">
+          <div class="project-box">
+            <a class="project-title" href="/work/zorc.html">Zork-Game</a>
+            <a class="project-github"
+               href="https://github.com/jimmy-d-f/zorc"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="View ZORC on GitHub">
+               <i class="fa-brands fa-github"></i>
+            </a>
+          </div>
+
+          <div class="project-box">
+            <a class="project-title" href="/work/sysinfo.html">Sysinfo</a>
+            <a class="project-github"
+               href="https://github.com/anton-exe/sysinfo-ul"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="View Sysinfo on GitHub">
+               <i class="fa-brands fa-github"></i>
+            </a>
+          </div>
+
+          <div class="project-box">
+            <a class="project-title" href="/work/devdriver.html">Device-Driver</a>
+            <a class="project-github"
+               href="https://github.com/Slynxh07/Device-Driver"
+               target="_blank" rel="noopener noreferrer"
+               aria-label="View device driver on GitHub">
+               <i class="fa-brands fa-github"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-area">
+        <h2>Blog</h2>
+        <p>Here are some things I have written about:</p>
+
+        <div class="projects-row">
+          <div class="project-box">
+            <a class="project-title" href="/blog/whydatabases.html">Databases</a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <div class="footer-left">
+      <img src="/images/me.png" alt="Jimmy Frosting" class="footer-avatar">
+
+      <a href="mailto:contact@jimmyfrosting.com" aria-label="Email">
+        <i class="fa-solid fa-envelope"></i>
+      </a>
+
+      <a href="https://www.linkedin.com/in/james-david-frosting/"
+        target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+
+      <a href="https://www.instagram.com/jimmy_frosti/"
+        target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+
+      <a href="https://github.com/jimmy-d-f"
+        target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
+
+      <a href="https://wa.me/353896169208"
+        target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+      </a>
+    </div>
+
+    <div class="footer-right">
+      <img src="/images/logo.png" alt="Jimmy Frosting logo" class="footer-logo">
+    </div>
+  </footer>
+
+  <script>
+    // Simple char-by-char typewriter for plain text
+    function typeWriterPlain(element, fullText, speed, done) {
+      element.textContent = '';
+      let i = 0;
+      function tick() {
+        if (i < fullText.length) {
+          element.textContent += fullText.charAt(i);
+          i++;
+          setTimeout(tick, speed);
+        } else if (typeof done === 'function') {
+          done();
+        }
+      }
+      tick();
+    }
+
+    // Typewriter only on hero headings + paragraphs
+    function runHeroTypewriter(doneAll) {
+      const nodes = document.querySelectorAll('.hero h2, .hero p');
+      const steps = [];
+
+      nodes.forEach(node => {
+        const original = node.textContent;
+        steps.push(next => {
+          typeWriterPlain(node, original, 15, next);
+        });
+      });
+
+      let idx = 0;
+      function runStep() {
+        if (idx >= steps.length) {
+          if (typeof doneAll === 'function') doneAll();
+          return;
+        }
+        const fn = steps[idx++];
+        fn(runStep);
+      }
+
+      runStep();
+    }
+
+    // NAME COLOR EFFECT
+    const nameEl = document.getElementById('name');
+    const originalNameText = nameEl ? nameEl.textContent.trim() : '';
+
+    function getRandomColor() {
+      return '#' + Math.floor(Math.random() * 16777215)
+        .toString(16)
+        .padStart(6, '0');
+    }
+
+    function buildSpans() {
+      if (!nameEl) return;
+      nameEl.innerHTML = '';
+      for (const ch of originalNameText) {
+        if (ch === ' ') {
+          nameEl.appendChild(document.createTextNode(' '));
+          continue;
+        }
+        const span = document.createElement('span');
+        span.textContent = ch;
+        if (ch === 'J' || ch === 'F') {
+          span.classList.add('big-letter');
+        }
+        span.style.color = getRandomColor();
+        nameEl.appendChild(span);
+      }
+    }
+
+    if (nameEl) {
+      nameEl.addEventListener('mouseenter', () => {
+        const spans = nameEl.querySelectorAll('span');
+        spans.forEach(span => {
+          span.style.color = getRandomColor();
+        });
+      });
+
+      nameEl.addEventListener('mouseleave', () => {
+        buildSpans();
+      });
+    }
+
+    // WHITE STRIPE RANDOM HEIGHT + ANGLE
+    function randomizeStripe() {
+      const stripe = document.querySelector('.white-stripe');
+      if (!stripe) return;
+
+      const minH = 20;
+      const maxH = 50;
+      const h = minH + Math.random() * (maxH - minH);
+      stripe.style.height = h + 'vh';
+
+      const minA = -10;
+      const maxA = 10;
+      const angle = minA + Math.random() * (maxA - minA);
+      stripe.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+    }
+
+    window.addEventListener('load', () => {
+      randomizeStripe();
+      buildSpans();           // colorized title on load
+      runHeroTypewriter();    // typewriter only for hero content
+    });
+  </script>
+</body>
+</html>
