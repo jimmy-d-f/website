@@ -61,7 +61,7 @@
       color: #ffffff;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       min-height: 100vh;
-      padding-bottom: 60px;
+      padding-bottom: 80px;
       padding-left: 10px;
       padding-right: 100px;
       position: relative;
@@ -167,14 +167,8 @@
       color: #ffd166;
     }
 
-    .white-stripe {
-      position: fixed;
-      left: 50%;
-      width: 140vw;
-      background: #ffffff;
-      transform-origin: center;
-      z-index: 1;
-      pointer-events: none;
+    .content-area:last-of-type {
+      margin-bottom: 4rem;
     }
 
     footer {
@@ -247,17 +241,11 @@
       .footer-left a {
         font-size: 1.2rem;
       }
-
-      .white-stripe {
-        height: 22vh;
-      }
     }
   </style>
 </head>
 
 <body>
-  <div class="white-stripe"></div>
-
   <div class="blend-text">
     <header class="site-header">
       <div class="site-title" id="name">
@@ -452,27 +440,6 @@
       });
     }
 
-    function randomizeStripe() {
-      const stripe = document.querySelector('.white-stripe');
-      if (!stripe) return;
-
-      const minTop = 10;
-      const maxTop = 90;
-      const top = minTop + Math.random() * (maxTop - minTop);
-      stripe.style.top = top + 'vh';
-
-      const minH = 10;
-      const maxH = 50;
-      const h = minH + Math.random() * (maxH - minH);
-      stripe.style.height = h + 'vh';
-
-      const minA = -10;
-      const maxA = 10;
-      const angle = minA + Math.random() * (maxA - minA);
-
-      stripe.style.transform = `translate(-50%, 0) rotate(${angle}deg)`;
-    }
-
     function colorHeroHeadings() {
       const headings = document.querySelectorAll('.hero h2');
       headings.forEach(h => {
@@ -487,7 +454,6 @@
     });
 
     window.addEventListener('load', () => {
-      randomizeStripe();
       buildSpans();
       runHeroTypewriter();
       colorHeroHeadings();
