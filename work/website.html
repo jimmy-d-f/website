@@ -94,7 +94,7 @@
       color: #ffd166;
     }
 
-    /* NEW footer style copied from index.html */
+    /* New footer style (matches index.html) */
     footer {
       position: fixed;
       left: 0;
@@ -152,14 +152,19 @@
   <main>
     <section class="content-area">
       <p>
-        My project is a small Java game called zorc where I model a simple world of characters and rooms, and interact with it through a graphical interface instead of a text console. I’ve created classes like Character, Room, and their inventories to represent the player, locations, and items, and I use several GUI windows (intro, movement, stats, restaurant, checkout) to handle different parts of the game flow. The code is mostly Java with a bit of HTML, and it’s set up as an IntelliJ IDEA project that I can open and run directly from the IDE.
+        My project is a personal website built with plain HTML and CSS, styled
+        with the Doto font and a black colour scheme. It features
+        a fixed footer with social links, a typewriter animation on page text,
+        and separate work pages for each project. The site is fully static
+        with no build step — just files served directly, with a shared scripts
+        directory for JS utilities like the typewriter effect.
       </p>
 
       <div class="project-box">
         <a class="project-github"
-           href="https://github.com/jimmy-d-f/zorc"
+           href="https://github.com/jimmy-d-f/website"
            target="_blank" rel="noopener noreferrer"
-           aria-label="View ZORC on GitHub">
+           aria-label="View website on GitHub">
           <i class="fa-brands fa-github"></i>
         </a>
       </div>
@@ -197,7 +202,6 @@
   <script src="/scripts/typewriter.js"></script>
   <script>
     window.addEventListener('load', () => {
-      // apply to this page’s main text
       runTypewriter('.content-area p', { speed: 18, stagger: 0 });
     });
   </script>

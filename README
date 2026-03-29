@@ -1,0 +1,79 @@
+# My Personal Website
+
+This repository contains the source code for my personal website, built as a simple static site with HTML, CSS, and some JavaScript for interactivity. [page:1]
+
+The live site is deployed via GitHub Pages from the `master` branch. [page:1]
+
+---
+
+## What this site is
+
+My site is a small home on the internet where I introduce myself, showcase my work, and post occasional blogs.  
+It is intentionally lightweight so I can focus on learning and experimenting with web fundamentals.
+
+The main page includes sections for **About me**, **Work**, and **Blog**, along with links to my social profiles and email. [page:1]
+
+---
+
+## Features
+
+- A single-page layout with dedicated sections for who I am, what I work on, and what I write about.  
+- A typewriter-style animation that reveals headings and paragraphs in sequence. [page:1]  
+- Random visual effects like a moving white stripe and colorful title text. [page:1]  
+- Direct links to some of my technical projects and blog posts.  
+- A footer with quick access to my email, LinkedIn, Instagram, GitHub, and WhatsApp. [page:1]
+
+---
+
+## Repository structure
+
+```text
+.
+├── index.html        # Main landing page
+├── blog/             # Blog posts and related pages
+├── work/             # Project and portfolio pages
+├── scripts/          # JavaScript for animations and effects
+└── README            # This file
+```
+
+[page:1]
+
+---
+
+## How I develop locally
+
+There is no build step; I just open `index.html` in a browser or serve it using a simple static HTTP server. [page:1]
+
+Example with Python:
+
+```bash
+# Python 3
+python -m http.server 8080
+# then visit http://localhost:8080
+```
+
+---
+
+## How I deploy
+
+I use **GitHub Pages** for deployment: [page:1]
+
+1. I push changes to the `master` branch.
+2. GitHub Pages rebuilds and serves the updated version of the site.
+3. I visit the configured GitHub Pages URL to verify everything looks correct.
+
+---
+
+## Future plans
+
+I plan to:
+
+- Add more detailed write-ups for my projects under `/work`.  
+- Publish more blogs under `/blog`, especially about the things I am learning.  
+- Iterate on the design and add more subtle visual touches as my frontend skills improve.
+
+---
+
+## License
+
+I have not added a formal license yet, so by default all rights are reserved unless I state otherwise.

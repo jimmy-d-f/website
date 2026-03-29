@@ -103,65 +103,56 @@
       color: #ffd166;
     }
 
+    /* New footer style (matches index.html) */
     footer {
       position: fixed;
       left: 0;
+      right: 0;
       bottom: 0;
       width: 100%;
-      background: #800020;
-      color: #ffffff;
-      padding: 0.5rem 1.5rem;
-      font-size: 0.8rem;
+      background: #000000;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.9rem;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       font-family: "Doto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      z-index: 3;
     }
 
     .footer-left {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 3.75rem;
+      width: 100%;
+      max-width: 600px;
       font-weight: 500;
-    }
-
-    @media (max-width: 600px) {
-      .footer-left {
-        gap: 0.5rem;
-      }
-
-      .footer-left a {
-        font-size: 1.1rem;
-      }
-    }
-
-    .footer-avatar {
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 1px solid #ffffff;
     }
 
     .footer-left a {
       color: #ffe4f0;
       text-decoration: none;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
     }
 
     .footer-left a:hover {
       color: #ffffff;
     }
 
-    .footer-right {
-      display: flex;
-      align-items: center;
-      min-width: 0;
+    .footer-avatar,
+    .footer-right,
+    .footer-logo {
+      display: none;
     }
 
-    .footer-logo {
-      height: 32px;
-      width: auto;
+    @media (max-width: 600px) {
+      .footer-left {
+        max-width: 100%;
+      }
+
+      .footer-left a {
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
@@ -239,12 +230,12 @@
     </div>
   </footer>
 
-
+  <!-- adjust path if needed, e.g. "../scripts/typewriter.js" -->
   <script src="/scripts/typewriter.js"></script>
   <script>
     window.addEventListener('load', () => {
-      // apply to this page’s main text
-      runTypewriter('.content-area p', { speed: 18, stagger: 0 });
+      // sequential typewriter on headings + paragraphs in this section
+      runHeroTypewriterFor('.content-area', { speed: 18 });
     });
   </script>
 </body>
