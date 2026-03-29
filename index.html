@@ -6,39 +6,29 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/me - Kopie.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/me - Kopie.png">
 
-  <!-- SEO title -->
-  <title>Software Engineering Student Portfolio | Jimmy Frosting</title>
+  <title>Software Engineering Student Portfolio – Projects & Blog | Jimmy Frosting</title>
 
-  <!-- Mobile friendly viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Basic SEO meta -->
   <meta name="description"
-        content="Portfolio of Jimmy Frosting, a software engineering student building Linux device drivers, Java tools and games, and a static HTML/CSS website with a dark aesthetic.">
+        content="Portfolio of Jimmy Frosting, a software engineering student focused on Linux device drivers, Java CLI tools and games, and a minimalist dark personal website. Explore detailed write-ups of my projects, blog posts on systems, databases, and learning in public, plus links to my GitHub and social profiles.">
   <meta name="author" content="Jimmy Frosting">
   <meta name="robots" content="index, follow">
 
-  <!-- Open Graph (social sharing) -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Software Engineering Student Portfolio | Jimmy Frosting">
   <meta property="og:description"
         content="Explore projects by Jimmy Frosting, including Linux device drivers, Java CLI tools and games, and a static personal website with typewriter effects.">
   <meta property="og:url" content="https://jimmyfrosting.com/">
   <meta property="og:site_name" content="Jimmy Frosting">
-  <!-- Optional social image you host -->
-  <!-- <meta property="og:image" content="https://jimmyfrosting.com/assets/img/og-home.png"> -->
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Software Engineering Student Portfolio | Jimmy Frosting">
   <meta name="twitter:description"
         content="Software engineering student portfolio featuring systems projects, Java tools and games, and a static personal site.">
-  <!-- <meta name="twitter:image" content="https://jimmyfrosting.com/assets/img/og-home.png"> -->
 
-  <!-- Canonical URL -->
   <link rel="canonical" href="https://jimmyfrosting.com/">
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Jacquard+12+Charted&display=swap" rel="stylesheet">
@@ -46,7 +36,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet">
 
-  <!-- Icons -->
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
@@ -229,7 +218,6 @@
       display: none;
     }
 
-    /* Mobile tweaks */
     @media (max-width: 600px) {
       body {
         padding-left: 16px;
@@ -381,7 +369,6 @@
   </footer>
 
   <script>
-    // Simple char-by-char typewriter for plain text
     function typeWriterPlain(element, fullText, speed, done) {
       element.textContent = '';
       let i = 0;
@@ -397,7 +384,6 @@
       tick();
     }
 
-    // Sequential typewriter from top to bottom for hero content
     function runHeroTypewriter(doneAll) {
       const nodes = document.querySelectorAll('.hero h2, .hero p');
       const steps = [];
@@ -423,7 +409,6 @@
       runStep();
     }
 
-    // NAME COLOR EFFECT
     const nameEl = document.getElementById('name');
     const originalNameText = nameEl ? nameEl.textContent.trim() : '';
 
@@ -467,7 +452,6 @@
       });
     }
 
-    // WHITE STRIPE RANDOM POSITION + ANGLE
     function randomizeStripe() {
       const stripe = document.querySelector('.white-stripe');
       if (!stripe) return;
@@ -489,7 +473,6 @@
       stripe.style.transform = `translate(-50%, 0) rotate(${angle}deg)`;
     }
 
-    // RANDOM COLORS FOR About/Work/Blog HEADINGS
     function colorHeroHeadings() {
       const headings = document.querySelectorAll('.hero h2');
       headings.forEach(h => {
@@ -497,7 +480,6 @@
       });
     }
 
-    // change to a new random color on every hover
     document.addEventListener('mouseover', (e) => {
       if (e.target.matches('.hero h2')) {
         e.target.style.color = getRandomColor();
