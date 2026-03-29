@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <title>My Black Site</title>
 
+  <!-- Mobile friendly viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- [web:6][web:16] -->
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Jacquard+12+Charted&display=swap" rel="stylesheet">
@@ -11,7 +15,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet">
-  
+
+  <!-- Icons -->
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
@@ -25,14 +30,19 @@
       padding: 0;
     }
 
+    :root {
+      --font-body: clamp(1rem, 1.1vw + 0.7rem, 1.1rem);       /* [web:15][web:17] */
+      --font-h2: clamp(1.6rem, 1.4vw + 1.2rem, 2.1rem);
+      --font-title: clamp(2rem, 2vw + 1.4rem, 2.8rem);
+      --font-slogan: clamp(1.1rem, 0.7vw + 0.9rem, 1.5rem);
+    }
+
     body {
       background: #000000;
       color: #ffffff;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       min-height: 100vh;
-      padding-bottom: 60px;
-      padding-left: 10px;
-      padding-right: 100px;
+      padding: 24px 24px 72px;
       position: relative;
       overflow-x: hidden;
     }
@@ -44,24 +54,21 @@
     }
 
     .site-header {
-      margin-top: 100px;
-      margin-left: 100px;
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
+      margin-top: 72px;
+      margin-bottom: 40px;
+      max-width: 720px;
     }
 
     .site-title {
       font-family: "Jacquard 12", system-ui;
       font-weight: 600;
       font-style: normal;
-      font-size: 2.1rem;
+      font-size: var(--font-title);
       letter-spacing: 0;
       text-transform: uppercase;
-      opacity: 1;
-      pointer-events: auto;
       cursor: pointer;
       transition: color 0.2s;
+      line-height: 1.1;
     }
 
     .site-title .big-letter {
@@ -71,54 +78,34 @@
 
     .site-slogan {
       font-family: "Jacquard 12 Charted";
-      font-size: 1.4rem;
-      opacity: 1;
+      font-size: var(--font-slogan);
       max-width: 380px;
-      pointer-events: auto;
+      margin-top: 0.5rem;
+    }
+
+    .hero {
+      max-width: 720px;
     }
 
     .content-area {
-      margin-left: 100px;
-      text-align: left;
-      margin-top: 100px;
-      max-width: 640px;
-    }
-
-    .wrapper {
-      max-width: 480px;
-    }
-
-    @media (max-width: 600px) {
-      body {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
-
-      .site-header {
-        margin-left: 16px;
-        margin-top: 40px;
-      }
-
-      .content-area {
-        margin-left: 16px;
-        margin-top: 100px;
-        max-width: 100%;
-      }
+      margin-top: 40px;
     }
 
     h1,
-    h2,
-    p {
+    h2 {
       font-family: "Doto", system-ui;
-      font-size: 2.5rem;
+      font-size: var(--font-h2);
       letter-spacing: 0.08em;
       margin-bottom: 0.75rem;
+      text-transform: uppercase;
     }
 
     p {
-      font-size: 1rem;
-      opacity: 0.8;
-      margin: 0 auto 1.5rem;
+      font-family: "Doto", system-ui;
+      font-size: var(--font-body);
+      opacity: 0.9;
+      margin-bottom: 1.25rem;
+      line-height: 1.6;
     }
 
     a.button {
@@ -139,79 +126,10 @@
       color: #ffffff;
     }
 
-    .content-area h2 {
-      font-family: "Doto", system-ui;
-      font-size: 1.8rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .content-area p {
-      font-size: 1rem;
-      opacity: 0.9;
-      margin-bottom: 0.75rem;
-    }
-
-    .hero .content-area + .content-area {
-      margin-top: 40px;
-    }
-
-    footer {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      width: 100%;
-      background: #000000;
-      color: #000000;
-      padding: 0.5rem 1.5rem;
-      font-size: 0.8rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: "Doto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      z-index: 3;
-    }
-
-    .footer-left {
-      display: flex;
-      justify-content: space-between;  /* spread icons across width */
-      align-items: center;
-      width: 100%;
-      max-width: 600px;                /* tweak this if you want them tighter/looser */
-      font-weight: 500;
-    }
-
-    .footer-left a {
-      color: #ffe4f0;
-      text-decoration: none;
-      font-size: 1.3rem;
-    }
-
-    .footer-left a:hover {
-      color: #ffffff;
-    }
-
-    @media (max-width: 600px) {
-      .footer-left {
-        max-width: 100%;
-      }
-
-      .footer-left a {
-        font-size: 1.1rem;
-      }
-    }
-
-    /* no longer used, but kept here as a reference – harmless to leave or you can delete */
-    .footer-avatar,
-    .footer-right,
-    .footer-logo {
-      display: none;
-    }
-
     .projects-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.5rem;
+      gap: 1rem 2rem;
     }
 
     .project-box {
@@ -223,7 +141,7 @@
 
     .project-title {
       font-family: "Doto", system-ui;
-      font-size: 1.1rem;
+      font-size: 1rem;
       text-decoration: none;
       color: #ffffff;
     }
@@ -234,7 +152,7 @@
 
     .project-github {
       color: #ffffff;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       text-decoration: none;
     }
 
@@ -244,14 +162,85 @@
 
     .white-stripe {
       position: fixed;
-      top: 50%;
       left: 50%;
       width: 140vw;
-      height: 25vh;
       background: #ffffff;
       transform-origin: center;
       z-index: 1;
       pointer-events: none;
+    }
+
+    footer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      background: #000000;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Doto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      z-index: 3;
+    }
+
+    .footer-left {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 600px;
+      font-weight: 500;
+    }
+
+    .footer-left a {
+      color: #ffe4f0;
+      text-decoration: none;
+      font-size: 1.4rem;
+    }
+
+    .footer-left a:hover {
+      color: #ffffff;
+    }
+
+    .footer-avatar,
+    .footer-right,
+    .footer-logo {
+      display: none;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 600px) {
+      body {
+        padding: 16px 16px 80px;
+      }
+
+      .site-header {
+        margin-top: 40px;
+      }
+
+      .hero {
+        max-width: 100%;
+      }
+
+      .projects-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-left {
+        max-width: 100%;
+      }
+
+      .footer-left a {
+        font-size: 1.2rem;
+      }
+
+      .white-stripe {
+        height: 22vh;
+      }
     }
   </style>
 </head>
@@ -273,11 +262,10 @@
     <main class="hero">
       <section class="content-area">
         <h2>About me</h2>
-        <p>My name is Jimmy. I am studying software engineering and 
-          I made this website to practice my skills (I am still quite bad). 
+        <p>My name is Jimmy. I am studying software engineering and
+          I made this website to practice my skills (I am still quite bad).
         </p>
-
-        <p>I will post the work and technical projects I do on this website, 
+        <p>I will post the work and technical projects I do on this website,
           along with blogs about things I love. I hope you enjoy!
         </p>
       </section>
@@ -293,7 +281,7 @@
                href="https://github.com/jimmy-d-f/zorc"
                target="_blank" rel="noopener noreferrer"
                aria-label="View ZORC on GitHub">
-               <i class="fa-brands fa-github"></i>
+              <i class="fa-brands fa-github"></i>
             </a>
           </div>
 
@@ -303,7 +291,7 @@
                href="https://github.com/anton-exe/sysinfo-ul"
                target="_blank" rel="noopener noreferrer"
                aria-label="View Sysinfo on GitHub">
-               <i class="fa-brands fa-github"></i>
+              <i class="fa-brands fa-github"></i>
             </a>
           </div>
 
@@ -313,7 +301,7 @@
                href="https://github.com/Slynxh07/Device-Driver"
                target="_blank" rel="noopener noreferrer"
                aria-label="View device driver on GitHub">
-               <i class="fa-brands fa-github"></i>
+              <i class="fa-brands fa-github"></i>
             </a>
           </div>
         </div>
@@ -339,22 +327,22 @@
       </a>
 
       <a href="https://www.linkedin.com/in/james-david-frosting/"
-        target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+         target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
         <i class="fa-brands fa-linkedin"></i>
       </a>
 
       <a href="https://www.instagram.com/jimmy_frosti/"
-        target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+         target="_blank" rel="noopener noreferrer" aria-label="Instagram">
         <i class="fa-brands fa-instagram"></i>
       </a>
 
       <a href="https://github.com/jimmy-d-f"
-        target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+         target="_blank" rel="noopener noreferrer" aria-label="GitHub">
         <i class="fa-brands fa-github"></i>
       </a>
 
       <a href="https://wa.me/353896169208"
-        target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+         target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
         <i class="fa-brands fa-whatsapp"></i>
       </a>
     </div>
@@ -443,26 +431,36 @@
       });
     }
 
-    // WHITE STRIPE RANDOM HEIGHT + ANGLE
+    // WHITE STRIPE RANDOM POSITION + ANGLE
     function randomizeStripe() {
       const stripe = document.querySelector('.white-stripe');
       if (!stripe) return;
 
-      const minH = 20;
+      // random vertical position in viewport (10%–90%)
+      const minTop = 10;
+      const maxTop = 90;
+      const top = minTop + Math.random() * (maxTop - minTop);
+      stripe.style.top = top + 'vh';
+
+      // optional: random height
+      const minH = 10;
       const maxH = 50;
       const h = minH + Math.random() * (maxH - minH);
       stripe.style.height = h + 'vh';
 
+      // random angle
       const minA = -10;
       const maxA = 10;
       const angle = minA + Math.random() * (maxA - minA);
-      stripe.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+
+      // center horizontally, random vertical position
+      stripe.style.transform = `translate(-50%, 0) rotate(${angle}deg)`;
     }
 
     window.addEventListener('load', () => {
       randomizeStripe();
-      buildSpans();           // colorized title on load
-      runHeroTypewriter();    // typewriter only for hero content
+      buildSpans();
+      runHeroTypewriter();
     });
   </script>
 </body>
