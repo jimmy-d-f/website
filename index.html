@@ -5,13 +5,12 @@
   <title>My Black Site</title>
 
   <!-- Mobile friendly viewport -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- [web:36][web:39] -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Jacquard+12+Charted&display=swap" rel="stylesheet">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet">
@@ -31,7 +30,7 @@
     }
 
     :root {
-      --font-body: clamp(1rem, 1.1vw + 0.7rem, 1.1rem);       /* [web:15][web:17] */
+      --font-body: clamp(1rem, 1.1vw + 0.7rem, 1.1rem);
       --font-h2: clamp(1.6rem, 1.4vw + 1.2rem, 2.1rem);
       --font-title: clamp(2rem, 2vw + 1.4rem, 2.8rem);
       --font-slogan: clamp(1.1rem, 0.7vw + 0.9rem, 1.5rem);
@@ -44,7 +43,7 @@
       min-height: 100vh;
       padding-bottom: 60px;
       padding-left: 10px;
-      padding-right: 100px; /* right-shift desktop */
+      padding-right: 100px;
       position: relative;
       overflow-x: hidden;
     }
@@ -363,7 +362,6 @@
 
       nodes.forEach(node => {
         const original = node.textContent;
-        // hide content before starting
         node.textContent = '';
         steps.push(next => {
           typeWriterPlain(node, original, 15, next);
@@ -381,16 +379,19 @@
       }
 
       runStep();
-    } /* [web:40][web:45] */
+    }
 
     // NAME COLOR EFFECT
     const nameEl = document.getElementById('name');
     const originalNameText = nameEl ? nameEl.textContent.trim() : '';
 
     function getRandomColor() {
-      return '#' + Math.floor(Math.random() * 16777215)
-        .toString(16)
-        .padStart(6, '0');
+      let letters = "0123456789ABCDEF";
+      let color = "#";
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color; /* [web:15][web:19] */
     }
 
     function buildSpans() {
@@ -443,14 +444,30 @@
       const maxA = 10;
       const angle = minA + Math.random() * (maxA - minA);
 
-      stripe.style.transform = `translate(-50%, 0) rotate(${angle}deg)`;  /* [web:19][web:23] */
+      stripe.style.transform = `translate(-50%, 0) rotate(${angle}deg)`;
     }
+
+    // RANDOM COLORS FOR About/Work/Blog HEADINGS
+    function colorHeroHeadings() {
+      const headings = document.querySelectorAll('.hero h2');
+      headings.forEach(h => {
+        h.style.color = getRandomColor();
+      });
+    }
+
+    // change to a new random color on every hover
+    document.addEventListener('mouseover', (e) => {
+      if (e.target.matches('.hero h2')) {
+        e.target.style.color = getRandomColor(); /* [web:17][web:20] */
+      }
+    });
 
     window.addEventListener('load', () => {
       randomizeStripe();
-      buildSpans();      // title colors
-      runHeroTypewriter(); // type from top to bottom
-    });
+      buildSpans();
+      runHeroTypewriter();
+      colorHeroHeadings(); // random color on each load
+    }); /* [web:18][web:21] */
   </script>
 </body>
 </html>
