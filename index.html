@@ -5,7 +5,7 @@
   <title>My Black Site</title>
 
   <!-- Mobile friendly viewport -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- [web:6][web:16] -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- [web:36][web:39] -->
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,7 +42,9 @@
       color: #ffffff;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       min-height: 100vh;
-      padding: 24px 24px 72px;
+      padding-bottom: 60px;
+      padding-left: 10px;
+      padding-right: 100px; /* right-shift desktop */
       position: relative;
       overflow-x: hidden;
     }
@@ -54,9 +56,11 @@
     }
 
     .site-header {
-      margin-top: 72px;
-      margin-bottom: 40px;
-      max-width: 720px;
+      margin-top: 100px;
+      margin-left: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
     }
 
     .site-title {
@@ -80,7 +84,6 @@
       font-family: "Jacquard 12 Charted";
       font-size: var(--font-slogan);
       max-width: 380px;
-      margin-top: 0.5rem;
     }
 
     .hero {
@@ -88,7 +91,10 @@
     }
 
     .content-area {
-      margin-top: 40px;
+      margin-left: 100px;
+      text-align: left;
+      margin-top: 100px;
+      max-width: 640px;
     }
 
     h1,
@@ -108,28 +114,10 @@
       line-height: 1.6;
     }
 
-    a.button {
-      display: inline-block;
-      padding: 0.75rem 1.75rem;
-      border-radius: 999px;
-      border: 1px solid #ffffff;
-      color: #000000;
-      background: #ffffff;
-      text-decoration: none;
-      font-size: 0.95rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    a.button:hover {
-      background: #000000;
-      color: #ffffff;
-    }
-
     .projects-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem 2rem;
+      gap: 1.5rem;
     }
 
     .project-box {
@@ -141,7 +129,7 @@
 
     .project-title {
       font-family: "Doto", system-ui;
-      font-size: 1rem;
+      font-size: 1.1rem;
       text-decoration: none;
       color: #ffffff;
     }
@@ -152,7 +140,7 @@
 
     .project-github {
       color: #ffffff;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       text-decoration: none;
     }
 
@@ -211,17 +199,20 @@
       display: none;
     }
 
-    /* Mobile adjustments */
     @media (max-width: 600px) {
       body {
-        padding: 16px 16px 80px;
+        padding-left: 16px;
+        padding-right: 16px;
       }
 
       .site-header {
+        margin-left: 16px;
         margin-top: 40px;
       }
 
-      .hero {
+      .content-area {
+        margin-left: 16px;
+        margin-top: 60px;
         max-width: 100%;
       }
 
@@ -365,13 +356,15 @@
       tick();
     }
 
-    // Typewriter only on hero headings + paragraphs
+    // Sequential typewriter from top to bottom for hero content
     function runHeroTypewriter(doneAll) {
       const nodes = document.querySelectorAll('.hero h2, .hero p');
       const steps = [];
 
       nodes.forEach(node => {
         const original = node.textContent;
+        // hide content before starting
+        node.textContent = '';
         steps.push(next => {
           typeWriterPlain(node, original, 15, next);
         });
@@ -388,7 +381,7 @@
       }
 
       runStep();
-    }
+    } /* [web:40][web:45] */
 
     // NAME COLOR EFFECT
     const nameEl = document.getElementById('name');
@@ -436,31 +429,27 @@
       const stripe = document.querySelector('.white-stripe');
       if (!stripe) return;
 
-      // random vertical position in viewport (10%–90%)
       const minTop = 10;
       const maxTop = 90;
       const top = minTop + Math.random() * (maxTop - minTop);
       stripe.style.top = top + 'vh';
 
-      // optional: random height
       const minH = 10;
       const maxH = 50;
       const h = minH + Math.random() * (maxH - minH);
       stripe.style.height = h + 'vh';
 
-      // random angle
       const minA = -10;
       const maxA = 10;
       const angle = minA + Math.random() * (maxA - minA);
 
-      // center horizontally, random vertical position
-      stripe.style.transform = `translate(-50%, 0) rotate(${angle}deg)`;
+      stripe.style.transform = `translate(-50%, 0) rotate(${angle}deg)`;  /* [web:19][web:23] */
     }
 
     window.addEventListener('load', () => {
       randomizeStripe();
-      buildSpans();
-      runHeroTypewriter();
+      buildSpans();      // title colors
+      runHeroTypewriter(); // type from top to bottom
     });
   </script>
 </body>
