@@ -198,6 +198,7 @@
       display: none;
     }
 
+    /* Mobile tweaks */
     @media (max-width: 600px) {
       body {
         padding-left: 16px;
@@ -401,7 +402,7 @@
       for (let i = 0; i < 6; i++) {
         color += letters[Math.floor(Math.random() * 16)];
       }
-      return color; /* [web:15][web:19] */
+      return color;
     }
 
     function buildSpans() {
@@ -468,7 +469,7 @@
     // change to a new random color on every hover
     document.addEventListener('mouseover', (e) => {
       if (e.target.matches('.hero h2')) {
-        e.target.style.color = getRandomColor(); /* [web:17][web:20] */
+        e.target.style.color = getRandomColor();
       }
     });
 
@@ -476,8 +477,8 @@
       randomizeStripe();
       buildSpans();
       runHeroTypewriter();
-      colorHeroHeadings(); // random color on each load
-    }); /* [web:18][web:21] */
+      colorHeroHeadings();
+    });
   </script>
 </body>
 </html>

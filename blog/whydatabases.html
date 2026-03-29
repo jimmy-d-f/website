@@ -4,11 +4,15 @@
   <meta charset="UTF-8">
   <title>Jimmy Frosting</title>
 
+  <!-- Mobile friendly viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome -->
+  <!-- Icons -->
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
@@ -22,6 +26,11 @@
       padding: 0;
     }
 
+    :root {
+      --font-body: clamp(1rem, 1.1vw + 0.7rem, 1.1rem);
+      --font-h2: clamp(1.4rem, 1.2vw + 1.1rem, 1.9rem);
+    }
+
     body {
       background: #000000;
       color: #ffffff;
@@ -30,7 +39,8 @@
       padding-bottom: 60px;
       padding-left: 10px;
       padding-right: 100px;
-      box-sizing: border-box;
+      position: relative;
+      overflow-x: hidden;
     }
 
     .content-area {
@@ -40,70 +50,25 @@
       max-width: 640px;
     }
 
-    @media (max-width: 600px) {
-      body {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
-
-      .content-area {
-        margin-left: 16px;
-        margin-top: 100px;
-        max-width: 100%;
-      }
-    }
-
     .content-area p {
       font-family: "Doto", system-ui;
-      font-size: 1rem;
+      font-size: var(--font-body);
       letter-spacing: 0.08em;
       opacity: 0.9;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
     }
 
     .content-area h2 {
       font-family: "Doto", system-ui;
-      font-size: 1.3rem;
+      font-size: var(--font-h2);
       letter-spacing: 0.12em;
-      margin-top: 1.5rem;
-      margin-bottom: 0.5rem;
+      margin-top: 1.75rem;
+      margin-bottom: 0.6rem;
       text-transform: uppercase;
     }
 
-    .project-box {
-      margin-top: 0.5rem;
-      padding: 0;
-      border: none;
-      border-radius: 0;
-      background: transparent;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      max-width: none;
-    }
-
-    .project-title {
-      font-family: "Doto", system-ui;
-      font-size: 1.1rem;
-      text-decoration: none;
-      color: #ffffff;
-    }
-
-    .project-title:hover {
-      text-decoration: underline;
-    }
-
-    .project-github {
-      color: #ffffff;
-      font-size: 1.5rem;
-      text-decoration: none;
-    }
-
-    .project-github:hover {
-      color: #ffd166;
-    }
-
-    /* New footer style (matches index.html) */
+    /* Footer same style as index.html */
     footer {
       position: fixed;
       left: 0;
@@ -145,7 +110,19 @@
       display: none;
     }
 
+    /* Mobile tweaks */
     @media (max-width: 600px) {
+      body {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .content-area {
+        margin-left: 16px;
+        margin-top: 60px;
+        max-width: 100%;
+      }
+
       .footer-left {
         max-width: 100%;
       }
@@ -230,11 +207,10 @@
     </div>
   </footer>
 
-  <!-- adjust path if needed, e.g. "../scripts/typewriter.js" -->
+  <!-- adjust src if this file sits in /blog -->
   <script src="/scripts/typewriter.js"></script>
   <script>
     window.addEventListener('load', () => {
-      // sequential typewriter on headings + paragraphs in this section
       runHeroTypewriterFor('.content-area', { speed: 18 });
     });
   </script>

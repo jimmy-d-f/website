@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <title>Jimmy Frosting</title>
 
+  <!-- Mobile friendly viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet">
@@ -22,6 +26,10 @@
       padding: 0;
     }
 
+    :root {
+      --font-body: clamp(1rem, 1.1vw + 0.7rem, 1.1rem);
+    }
+
     body {
       background: #000000;
       color: #ffffff;
@@ -31,6 +39,8 @@
       padding-left: 10px;
       padding-right: 100px;
       box-sizing: border-box;
+      position: relative;
+      overflow-x: hidden;
     }
 
     .content-area {
@@ -40,25 +50,13 @@
       max-width: 640px;
     }
 
-    @media (max-width: 600px) {
-      body {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
-
-      .content-area {
-        margin-left: 16px;
-        margin-top: 100px;
-        max-width: 100%;
-      }
-    }
-
     .content-area p {
       font-family: "Doto", system-ui;
-      font-size: 1rem;
+      font-size: var(--font-body);
       letter-spacing: 0.08em;
       opacity: 0.9;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
     }
 
     .project-box {
@@ -94,7 +92,7 @@
       color: #ffd166;
     }
 
-    /* New footer style (matches index.html) */
+    /* Footer same style as index.html */
     footer {
       position: fixed;
       left: 0;
@@ -136,7 +134,19 @@
       display: none;
     }
 
+    /* Mobile tweaks */
     @media (max-width: 600px) {
+      body {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .content-area {
+        margin-left: 16px;
+        margin-top: 60px;
+        max-width: 100%;
+      }
+
       .footer-left {
         max-width: 100%;
       }
@@ -197,7 +207,6 @@
   <script src="/scripts/typewriter.js"></script>
   <script>
     window.addEventListener('load', () => {
-      // apply to this page’s main text
       runTypewriter('.content-area p', { speed: 18, stagger: 0 });
     });
   </script>
