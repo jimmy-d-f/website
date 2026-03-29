@@ -1,4 +1,4 @@
-// Basic char‑by‑char typewriter for a single element
+// Basic char‑by‑char typewriter for a single node
 function typeWriterPlain(element, fullText, speed, done) {
   if (!element) return;
   element.textContent = '';
@@ -17,7 +17,33 @@ function typeWriterPlain(element, fullText, speed, done) {
   tick();
 }
 
-// Apply typewriter to all matching elements in parallel or staggered
+// Sequential typewriter from top to bottom inside a container
+function runHeroTypewriterFor(containerSelector, { speed = 15 } = {}) {
+  const container = document.querySelector(containerSelector);
+  if (!container) return;
+
+  const nodes = container.querySelectorAll('h2, p');
+  const steps = [];
+
+  nodes.forEach(node => {
+    const original = node.textContent;
+    node.textContent = '';
+    steps.push(next => {
+      typeWriterPlain(node, original, speed, next);
+    });
+  });
+
+  let idx = 0;
+  function runStep() {
+    if (idx >= steps.length) return;
+    const fn = steps[idx++];
+    fn(runStep);
+  }
+
+  runStep();
+}
+
+// Parallel/staggered typewriter for all matching elements
 function runTypewriter(selector, { speed = 18, stagger = 0 } = {}) {
   const nodes = document.querySelectorAll(selector);
   let index = 0;
@@ -35,15 +61,5 @@ function runTypewriter(selector, { speed = 18, stagger = 0 } = {}) {
     });
   }
 
-  // Clear all first so they don't flash full text
-  nodes.forEach(node => {
-    node.dataset.fullText = node.textContent;
-    node.textContent = '';
-  });
-
-  // Reset originals from dataset and start
-  nodes.forEach(node => {
-    node.textContent = node.dataset.fullText || '';
-  });
   startNext();
 }
