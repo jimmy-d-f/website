@@ -2,10 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Jimmy Frosting</title>
+
+  <!-- SEO title -->
+  <title>Linux USB Keyboard Device Driver in C | Jimmy Frosting</title>
 
   <!-- Mobile friendly viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Basic SEO meta -->
+  <meta name="description"
+        content="Group-built Linux USB keyboard device driver in C with separate kernel-space and user-space components, custom character device, and scripts for building and managing the module.">
+  <meta name="author" content="Jimmy Frosting">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph (social sharing) -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Linux USB Keyboard Device Driver in C | Jimmy Frosting">
+  <meta property="og:description"
+        content="Hands-on Linux device driver project: custom character driver, user-space tooling, and scripts for managing a USB keyboard kernel module.">
+  <meta property="og:url" content="https://jimmyfrosting.com/projects/linux-usb-keyboard-device-driver.html">
+  <meta property="og:site_name" content="Jimmy Frosting">
+  <!-- Optional image you host -->
+  <!-- <meta property="og:image" content="https://jimmyfrosting.com/assets/img/linux-driver-project.png"> -->
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Linux USB Keyboard Device Driver in C | Jimmy Frosting">
+  <meta name="twitter:description"
+        content="Linux USB keyboard device driver project in C with kernel-space and user-space components.">
+  <!-- <meta name="twitter:image" content="https://jimmyfrosting.com/assets/img/linux-driver-project.png"> -->
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://jimmyfrosting.com/projects/linux-usb-keyboard-device-driver.html">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -161,7 +189,9 @@
   <main>
     <section class="content-area">
       <p>
-        My project is a group‑built USB keyboard Linux device driver written in C, with separate kernel‑space and user‑space components. We implemented a custom character driver under kernel/ that exposes the keyboard data to user space, and a user program under user/ that interacts with the device, plus shell scripts (start.sh, close.sh) to compile, insert/remove the module, and launch the app with the correct privileges. The whole project is designed as a hands‑on exercise in low‑level Linux development, covering kernel modules, device files, and safe communication between kernel and user space.
+        My project is a group‑built USB keyboard Linux device driver written in C, with separate kernel‑space and user‑space components.
+        We implemented a custom character driver under kernel/ that exposes the keyboard data to user space, and a user program under user/ that interacts with the device, plus shell scripts (start.sh, close.sh) to compile, insert/remove the module, and launch the app with the correct privileges.
+        The whole project is designed as a hands‑on exercise in low‑level Linux development, covering kernel modules, device files, and safe communication between kernel and user space.
       </p>
 
       <div class="project-box">
