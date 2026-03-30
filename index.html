@@ -161,6 +161,8 @@
       color: #ffffff;
       font-size: 1.5rem;
       text-decoration: none;
+      opacity: 0;
+      transition: opacity 0.5s;
     }
 
     .project-github:hover {
@@ -200,6 +202,8 @@
       color: #ffe4f0;
       text-decoration: none;
       font-size: 1.4rem;
+      opacity: 0;
+      transition: opacity 0.5s;
     }
 
     .footer-left a:hover {
@@ -373,7 +377,7 @@
     }
 
     function runHeroTypewriter(doneAll) {
-      const nodes = document.querySelectorAll('.hero h2, .hero p');
+      const nodes = document.querySelectorAll('.hero h2, .hero p, .hero .project-title');
       const steps = [];
 
       nodes.forEach(node => {
@@ -395,6 +399,17 @@
       }
 
       runStep();
+    }
+
+    function revealIcons() {
+      document.querySelectorAll('.project-github').forEach(el => {
+        el.style.opacity = '1';
+      });
+      document.querySelectorAll('.footer-left a').forEach((el, i) => {
+        setTimeout(() => {
+          el.style.opacity = '1';
+        }, i * 120);
+      });
     }
 
     const nameEl = document.getElementById('name');
@@ -455,7 +470,7 @@
 
     window.addEventListener('load', () => {
       buildSpans();
-      runHeroTypewriter();
+      runHeroTypewriter(revealIcons);
       colorHeroHeadings();
     });
   </script>
