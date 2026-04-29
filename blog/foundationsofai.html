@@ -9,15 +9,13 @@
   <title>Mathematical Foundations of AI | Jimmy Frosting</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-        content="Clear, beginner-friendly explanation of the mathematical foundations of artifical intelligence.">
+  <meta name="description" content="Clear, beginner-friendly explanation of the mathematical foundations of artificial intelligence.">
   <meta name="author" content="Jimmy Frosting">
   <meta name="robots" content="index, follow">
 
   <meta property="og:type" content="article">
   <meta property="og:title" content="Mathematical Foundations of AI | Jimmy Frosting">
-  <meta property="og:description"
-        content="Learn the mathematical foundations of artifical intelligence.">
+  <meta property="og:description" content="Learn the mathematical foundations of artificial intelligence.">
   <meta property="og:url" content="https://jimmyfrosting.com/blog/mathematical-foundations-of-ai">
   <meta property="og:site_name" content="Jimmy Frosting">
   <meta property="og:image" content="https://jimmyfrosting.com/images/me - Kopie.png">
@@ -37,7 +35,7 @@
   >
 
   <style>
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -54,7 +52,7 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       min-height: 100vh;
       padding-bottom: 60px;
-      padding-left: 10px;
+      padding-left: 100px;
       padding-right: 100px;
       position: relative;
       overflow-x: hidden;
@@ -63,8 +61,12 @@
     .content-area {
       margin-left: 100px;
       text-align: left;
-      margin-top: 100px;
+      margin-top: 0;
       max-width: 640px;
+    }
+
+    .content-area:first-of-type {
+      margin-top: 100px;
     }
 
     .content-area p {
@@ -83,6 +85,43 @@
       margin-top: 1.75rem;
       margin-bottom: 0.6rem;
       text-transform: uppercase;
+    }
+
+    /* All sections and images hidden until typewriter reaches them */
+    .content-area,
+    .img-reveal {
+      visibility: hidden;
+    }
+
+    .content-area.typing,
+    .content-area.done {
+      visibility: visible;
+    }
+
+    .img-reveal {
+      margin-left: 100px;
+      margin-bottom: 1rem;
+      max-width: 640px;
+      overflow: hidden;
+    }
+
+    .img-reveal img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      transform: translateY(100%);
+      opacity: 0;
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .img-reveal.visible {
+      visibility: visible;
+    }
+
+    .img-reveal.visible img {
+      transform: translateY(0);
+      opacity: 1;
     }
 
     footer {
@@ -134,7 +173,15 @@
 
       .content-area {
         margin-left: 16px;
+        max-width: 100%;
+      }
+
+      .content-area:first-of-type {
         margin-top: 60px;
+      }
+
+      .img-reveal {
+        margin-left: 16px;
         max-width: 100%;
       }
 
@@ -146,75 +193,120 @@
         font-size: 1.2rem;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .content-area,
+      .img-reveal {
+        visibility: visible;
+      }
+      .img-reveal img {
+        transform: none;
+        opacity: 1;
+        transition: none;
+      }
+    }
   </style>
 </head>
 
 <body>
   <main>
+
     <section class="content-area">
-      <h2>The difference between artifical intelligence and machine learning</h2>
-      <p>
-        Most people tend to use the terms artifical intelligence and machine learning interchangeably, especially people outside of the technological industry.
-      </p>
-      <p>
-        Artifical intelligence (AI) is simply a system that resembles human intelligence. Machine Learning (ML) is a system that is dependant on external data to learn. Thus, ML is a subset of AI. 
-      </p>
-      <p>
-        Here is an example: Suppose we want to build a program that looks at a photo to see if it has a dog or not. 
-      </p>
-      <p>
-        The AI way to do this is to hard-code what makes up a dog so the system knows. For example; does the dog have 4 legs, a tail, fur, and so on. The problem with this is that a picture could feature a dog-looking like thing (a 😺 for example) and the system would still think it's a dog.
-      </p>
-      <p>
-        With machine learning, we could "feed" the system lots and lots of pictures of dogs and dog-looking like things and tell them what actually is a dog and what is not a dog. This is how the system learns. For more complex things, the ML way is arguably far superior to the AI way.
-      </p>
-      <p>
-        There are three main types of machine learning training processes: Supervised, Unsupervised, and Re-informent learning. 
-      </p>
-      <p>
-        Supervised | You actually give answers to what the training data is (from our example: dog, dog, no dog, dog, etc).
-      </p>
-      <p>
-        Unsupervised | You don't give the system "answers". This is used primarily to find outlier data, for dimensionality reduction (i.e. to lower the quality of training data but still keep it unique), or for clustering (grouping data together).
-      </p>
-      <p>
-        Re-inforcement | Learning like a child. You give the system lollies when it does something correctly and send it to Dagestan 2 3 years if it was bad.
-      <h2>Linear regression</h2>
-      <p>
-        Let's say have a graph with many data points on them. We want to find the line "of best fit", i.e., the one that gets as close as possible to all the data points.
-      </p>
-      <p>
-        This line can be represented by the following formula.
-      </p>
-      <img src="/images/" alt="Description of image" width="600" height="400" loading="lazy">
-      <p>
-        Instead of scattering information across many static pages or ad‑hoc files, everything lives in one organized system, which simplifies both the code and the maintenance.
-      </p>
-
-      <h2>Consistency and Reliability</h2>
-      <p>
-        When users sign up, place orders, or transfer money, those actions need to either fully succeed or not happen at all, with no half‑finished state left behind.
-      </p>
-      <p>
-        Database engines implement transaction logic so that multiple related changes are applied together, keeping records accurate even if something fails mid‑request.
-      </p>
-
-      <h2>Security and Access Control</h2>
-      <p>
-        Real‑world data often includes sensitive details, so a system must decide who is allowed to read or modify particular pieces of information.
-      </p>
-      <p>
-        Databases support permissions, authentication, and other controls that help protect data while still letting applications and users access what they legitimately need.
-      </p>
-
-      <h2>Powering Modern Applications</h2>
-      <p>
-        From social feeds and video platforms to analytics dashboards and IoT devices, almost every modern application depends on a database running quietly in the background.
-      </p>
-      <p>
-        As usage grows, databases can index, cache, and process larger volumes of information so apps remain responsive and continue to function correctly at scale.
-      </p>
+      <h2>The difference between artificial intelligence and machine learning</h2>
+      <p>Most people tend to use the terms artificial intelligence and machine learning interchangeably, especially people outside of the technology industry.</p>
+      <p>Artificial intelligence (AI) is simply a system that resembles human intelligence. Machine Learning (ML) is a system that is dependent on external data to learn. Thus, ML is a subset of AI.</p>
+      <p>Here is an example: suppose we want to build a program that looks at a photo to determine whether it contains a dog or not.</p>
+      <p>The AI approach is to hard-code what makes up a dog so the system knows. For example: does the animal have 4 legs, a tail, fur, and so on. The problem with this is that another animal sharing those features (a cat, for example) could be incorrectly identified as a dog.</p>
+      <p>With machine learning, we could feed the system lots of pictures of dogs and non-dogs and label what each one actually is. This is how the system learns. For complex recognition tasks, the ML approach is far superior to the rule-based AI approach.</p>
+      <p>There are three main types of machine learning training processes: Supervised, Unsupervised, and Reinforcement learning.</p>
+      <p>Supervised | You provide the correct answers for each piece of training data (from our example: dog, dog, not a dog, dog, etc).</p>
+      <p>Unsupervised | You don't give the system any answers. This is used primarily to find outlier data, for dimensionality reduction (i.e. reducing the complexity of training data while preserving its structure), or for clustering (grouping similar data points together).</p>
+      <p>Reinforcement | The system learns through trial and error. It receives a reward when it does something correctly and a penalty when it does something wrong, gradually learning the optimal behaviour over time.</p>
     </section>
+
+    <section class="content-area">
+      <h2>Linear regression</h2>
+      <p>Let's say we have a graph with many data points on it. We want to find the line of best fit — the one that gets as close as possible to all the data points.</p>
+      <p>This line can be represented by the following formula.</p>
+    </section>
+
+    <div class="img-reveal">
+      <img src="/images/foundationsofai/linearregessionformula.png" alt="Linear regression formula" loading="lazy">
+    </div>
+
+    <section class="content-area">
+      <p>This formula is the same as y = mx + b, but we use theta notation because for more complex equations with multiple variables, it is easier to work with.</p>
+      <p>Now that we have a line, we can measure how far off the data points are from it. We use the following formula.</p>
+    </section>
+
+    <div class="img-reveal">
+      <img src="/images/foundationsofai/lossfunction.png" alt="Loss function formula" loading="lazy">
+    </div>
+
+    <section class="content-area">
+      <p>Measuring the difference between data points and a line is called a loss function. One of the most common types is the Mean Squared Error (MSE).</p>
+      <p>We take each predicted point on the line and subtract the real data value from it, giving us the error. We square this so that all errors are positive numbers. We repeat this for every data point, add them all together, and multiply by (1/m), where m is the total number of data points. This gives us the mean (average) error.</p>
+      <p>Ultimately, we want to minimise the mean squared error, so we need to adjust our line's slope (theta1) and/or y-intercept (theta0). A common technique for this is called gradient descent. This is the formula.</p>
+    </section>
+
+    <div class="img-reveal">
+      <img src="/images/foundationsofai/gradientdescent.png" alt="Gradient descent formula" loading="lazy">
+    </div>
+
+    <section class="content-area">
+      <p>The result of this function is a vector with two values: the top value represents how much the loss changes with respect to theta0 (the y-intercept), and the bottom represents how much it changes with respect to theta1 (the slope). These are computed by taking the partial derivative of the loss function with respect to each parameter. The factor of 2/m arises naturally from differentiating the squared error term using the chain rule.</p>
+      <p>To actually update and improve our parameters, we use the following formula.</p>
+    </section>
+
+    <div class="img-reveal">
+      <img src="/images/foundationsofai/updaterule.png" alt="Gradient descent update rule" loading="lazy">
+    </div>
+
+    <section class="content-area">
+      <p>We multiply the gradient vector by a so-called learning rate that we set ourselves. This learning rate controls how drastically the parameters are adjusted at each step.</p>
+      <p>Think of it like throwing a basketball into a hoop. Throw too short and the ball doesn't reach. Overshoot and it goes too far. The learning rate needs to be just right — typically chosen through experimentation or based on how well the model is converging.</p>
+      <p>We then subtract this result from our current parameters thetaj (the current slope and y-intercept in vector form), giving us the updated parameters thetaj+1.</p>
+      <p>We can also represent this update rule in matrix form.</p>
+    </section>
+
+    <div class="img-reveal">
+      <img src="/images/foundationsofai/matrixformgradientdescent.png" alt="Matrix form of gradient descent" loading="lazy">
+    </div>
+
+    <section class="content-area">
+      <p>We compute the difference between the predicted values and the actual values in matrix form, then multiply by the transpose of X and (2/m). This is mathematically identical to the summation form but is much more efficient to compute in code.</p>
+      <p>However, instead of using gradient descent to iteratively arrive at the optimal solution, we can get there in one step using the Normal Equation.</p>
+    </section>
+
+    <div class="img-reveal">
+      <img src="/images/foundationsofai/normalequation.png" alt="Normal equation" loading="lazy">
+    </div>
+
+    <section class="content-area">
+      <h2>Types of gradient descent</h2>
+      <p>Batch descent | The update rule is applied once using all the training data at the same time. This is accurate but becomes impractical with large datasets.</p>
+    </section>
+
+    <div class="img-reveal">
+      <img src="/images/foundationsofai/batchgradientdescent.png" alt="Batch gradient descent" loading="lazy">
+    </div>
+
+    <section class="content-area">
+      <p>Stochastic descent | The update rule is applied using one random data point at a time, cycling through all data points in each epoch. It is computationally faster but produces a noisier, less stable path to the minimum.</p>
+    </section>
+
+    <div class="img-reveal">
+      <img src="/images/foundationsofai/stochasticgradientdescent.png" alt="Stochastic gradient descent" loading="lazy">
+    </div>
+
+    <section class="content-area">
+      <p>Mini-batch descent | The update rule is applied using small random batches of data points (e.g. 5 out of 50) per iteration. This combines the efficiency of stochastic descent with the stability of batch descent, making it the most widely used approach in practice.</p>
+    </section>
+
+    <div class="img-reveal">
+      <img src="/images/foundationsofai/minibatchgradientdescent.png" alt="Mini-batch gradient descent" loading="lazy">
+    </div>
+
   </main>
 
   <footer>
@@ -222,22 +314,18 @@
       <a href="mailto:contact@jimmyfrosting.com" aria-label="Email">
         <i class="fa-solid fa-envelope"></i>
       </a>
-
       <a href="https://www.linkedin.com/in/james-david-frosting/"
          target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
         <i class="fa-brands fa-linkedin"></i>
       </a>
-
       <a href="https://www.instagram.com/jimmy_frosti/"
          target="_blank" rel="noopener noreferrer" aria-label="Instagram">
         <i class="fa-brands fa-instagram"></i>
       </a>
-
       <a href="https://github.com/jimmy-d-f"
          target="_blank" rel="noopener noreferrer" aria-label="GitHub">
         <i class="fa-brands fa-github"></i>
       </a>
-
       <a href="https://wa.me/353896169208"
          target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
         <i class="fa-brands fa-whatsapp"></i>
@@ -245,11 +333,90 @@
     </div>
   </footer>
 
-  <script src="/scripts/typewriter.js"></script>
   <script>
-    window.addEventListener('load', () => {
-      runHeroTypewriterFor('.content-area', { speed: 18 });
-    });
+    // Collects all main children in order: sections and img-reveals
+    const blocks = Array.from(document.querySelector('main').children);
+    const SPEED = 18; // ms per character
+
+    // Extract full text + structure from a section, then retype it character by character
+    function typeSection(section, onDone) {
+      // Save original HTML, clear the section
+      const originalHTML = section.innerHTML;
+      section.innerHTML = '';
+      section.classList.add('typing');
+      section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      // Build a flat list of {node, text} to type out
+      const temp = document.createElement('div');
+      temp.innerHTML = originalHTML;
+
+      // We'll retype by reconstructing nodes
+      const allNodes = [];
+      function collectNodes(parent, targetParent) {
+        parent.childNodes.forEach(child => {
+          if (child.nodeType === Node.TEXT_NODE) {
+            allNodes.push({ type: 'text', text: child.textContent, parent: targetParent });
+          } else if (child.nodeType === Node.ELEMENT_NODE) {
+            const clone = document.createElement(child.tagName);
+            Array.from(child.attributes).forEach(a => clone.setAttribute(a.name, a.value));
+            targetParent.appendChild(clone);
+            allNodes.push({ type: 'element_start', element: clone });
+            collectNodes(child, clone);
+          }
+        });
+      }
+      collectNodes(temp, section);
+
+      // Flatten all text into a single character stream with node references
+      const charStream = [];
+      let currentTextNode = null;
+      allNodes.forEach(node => {
+        if (node.type === 'text') {
+          currentTextNode = document.createTextNode('');
+          node.parent.appendChild(currentTextNode);
+          for (const ch of node.text) {
+            charStream.push({ textNode: currentTextNode, char: ch });
+          }
+        }
+      });
+
+      let i = 0;
+      function typeNext() {
+        if (i >= charStream.length) {
+          section.classList.remove('typing');
+          section.classList.add('done');
+          if (onDone) onDone();
+          return;
+        }
+        charStream[i].textNode.textContent += charStream[i].char;
+        i++;
+        setTimeout(typeNext, SPEED);
+      }
+      typeNext();
+    }
+
+    function revealImage(imgReveal, onDone) {
+      imgReveal.classList.add('visible');
+      imgReveal.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      // Wait for the CSS transition to finish (700ms) then continue
+      setTimeout(onDone, 750);
+    }
+
+    // Run all blocks in sequence
+    function runSequence(index) {
+      if (index >= blocks.length) return;
+      const block = blocks[index];
+
+      if (block.classList.contains('content-area')) {
+        typeSection(block, () => runSequence(index + 1));
+      } else if (block.classList.contains('img-reveal')) {
+        revealImage(block, () => runSequence(index + 1));
+      } else {
+        runSequence(index + 1);
+      }
+    }
+
+    window.addEventListener('load', () => runSequence(0));
   </script>
 </body>
 </html>
