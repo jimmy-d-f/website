@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/me - Kopie.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/me - Kopie.png">
+
+  <title>Relationship Types & ER Model Traps | Jimmy Frosting</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+        content="Understanding relationship degree, recursive relationships, participation, and common ER modeling pitfalls like fan traps and chasm traps.">
+  <meta name="author" content="Jimmy Frosting">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Relationship Types & ER Model Traps | Jimmy Frosting">
+  <meta property="og:description"
+        content="How relationship degree and roles work in ER models, and how to avoid fan traps and chasm traps that create ambiguous pathways.">
+  <meta property="og:url" content="https://jimmyfrosting.com/blog/relationship-types-er-traps.html">
+  <meta property="og:site_name" content="Jimmy Frosting">
+  <meta property="og:image" content="https://jimmyfrosting.com/images/me - Kopie.png">
+
+  <link rel="canonical" href="https://jimmyfrosting.com/blog/relationship-types-er-traps.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --font-body: clamp(1rem, 1.1vw + 0.7rem, 1.1rem);
+      --font-h2: clamp(1.4rem, 1.2vw + 1.1rem, 1.9rem);
+    }
+
+    body {
+      background: #000000;
+      color: #ffffff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      padding-bottom: 60px;
+      padding-left: 10px;
+      padding-right: 100px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .content-area {
+      margin-left: 100px;
+      text-align: left;
+      margin-top: 100px;
+      max-width: 640px;
+    }
+
+    .content-area p {
+      font-family: "Doto", system-ui;
+      font-size: var(--font-body);
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .content-area h2 {
+      font-family: "Doto", system-ui;
+      font-size: var(--font-h2);
+      letter-spacing: 0.12em;
+      margin-top: 1.75rem;
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+    }
+
+    footer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      background: #000000;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Doto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      z-index: 3;
+    }
+
+    .footer-left {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 600px;
+      font-weight: 500;
+    }
+
+    .footer-left a {
+      color: #ffe4f0;
+      text-decoration: none;
+      font-size: 1.4rem;
+    }
+
+    .footer-left a:hover {
+      color: #ffffff;
+    }
+
+    .footer-avatar,
+    .footer-right,
+    .footer-logo {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .content-area {
+        margin-left: 16px;
+        margin-top: 60px;
+        max-width: 100%;
+      }
+
+      .footer-left {
+        max-width: 100%;
+      }
+
+      .footer-left a {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section class="content-area">
+
+      <h2>Relationship Degree and Participants</h2>
+      <p>
+        The degree of a relationship type is the number of participating entity types. The entities involved in a particular relationship are called participants. A recursive relationship is one where the same entity type participates more than once, taking on different roles each time — for example, an Employee entity that relates to itself through a "manages" relationship, where one employee is the manager and another is the subordinate.
+      </p>
+
+      <h2>Role Names</h2>
+      <p>
+        Relationships can be given role names to clarify the purpose each participating entity type plays. Role names become especially important in recursive relationships, where you need to distinguish which instance is playing which function — without clear roles, it is impossible to tell the manager from the managed or the parent from the child.
+      </p>
+
+      <h2>Participation</h2>
+      <p>
+        Participation determines whether all entity occurrences must participate in a relationship or only some. Total participation means every instance of an entity must be involved in the relationship; partial participation means some instances can exist without being linked. This distinction affects integrity constraints and how you handle missing relationships in queries.
+      </p>
+
+      <h2>Fan Traps</h2>
+      <p>
+        A fan trap occurs when a model represents a relationship between entity types, but the pathway between certain entity occurrences is ambiguous. For example, a company has divisions and staff, and each division operates multiple branches. You know Bob works in Division A, and Division A operates Branch 1 and Branch 2, but the model gives you no way to tell whether Bob works at Branch 1 or Branch 2. The connection fans out without enough specificity to trace the actual path.
+      </p>
+
+      <h2>Chasm Traps</h2>
+      <p>
+        A chasm trap happens when a model suggests a relationship pathway exists between entity types, but the pathway does not exist between certain entity occurrences. Consider a Branch → Staff → Property model where a branch has staff and staff oversee properties. If a staff member does not oversee any properties, there is no way to connect that branch to properties through that staff member. The path has a gap — a chasm — that breaks the chain and leaves some data unreachable.
+      </p>
+
+      <h2>Avoiding Traps</h2>
+      <p>
+        Both fan traps and chasm traps point to incomplete or incorrectly structured relationships. The fix usually involves introducing an additional entity or relationship to clarify the pathway, or adding attributes that capture the missing information directly. Recognizing these patterns early in the design process saves expensive restructuring later.
+      </p>
+
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-left">
+      <a href="mailto:contact@jimmyfrosting.com" aria-label="Email">
+        <i class="fa-solid fa-envelope"></i>
+      </a>
+
+      <a href="https://www.linkedin.com/in/james-david-frosting/"
+         target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+
+      <a href="https://www.instagram.com/jimmy_frosti/"
+         target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+
+      <a href="https://github.com/jimmy-d-f"
+         target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
+
+      <a href="https://wa.me/353896169208"
+         target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+      </a>
+    </div>
+  </footer>
+
+  <script src="/scripts/typewriter.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      runHeroTypewriterFor('.content-area', { speed: 18 });
+    });
+  </script>
+</body>
+</html>

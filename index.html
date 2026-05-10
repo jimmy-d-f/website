@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
   <link rel="icon" type="image/png" sizes="32x32" href="/images/me - Kopie.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/me - Kopie.png">
 
-  <title>Software Engineering Student Portfolio – Projects & Blog | Jimmy Frosting</title>
   <title>Software Engineering Student Portfolio | Jimmy Frosting</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -126,6 +126,26 @@
       text-transform: uppercase;
     }
 
+    .about-heading {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .about-heading h2 {
+      margin: 0;
+    }
+
+    .about-avatar {
+      width: 2em;
+      height: 2em;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      flex-shrink: 0;
+    }
+
     p {
       font-family: "Doto", system-ui;
       font-size: var(--font-body);
@@ -168,6 +188,106 @@
 
     .project-github:hover {
       color: #ffd166;
+    }
+
+    .blog-slider-wrap {
+      width: 100%;
+      margin-top: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity 0.45s ease, transform 0.45s ease, visibility 0.45s ease;
+    }
+
+    .blog-slider-wrap.blog-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .blog-slider {
+      display: flex;
+      gap: 1.25rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 0.5rem;
+    }
+
+    .blog-slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    .blog-card {
+      flex: 0 0 280px;
+      min-height: 220px;
+      padding: 1.25rem;
+      border: 1px solid #ffffff;
+      border-radius: 18px;
+      text-decoration: none;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+      scroll-snap-align: start;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-4px);
+      background: #ffffff;
+      color: #000000;
+    }
+
+    .blog-card-title {
+      font-family: "Doto", system-ui;
+      font-size: 1.05rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .blog-card-preview {
+      font-family: "Doto", system-ui;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      opacity: 0.9;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .blog-slider-controls {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .blog-slider-btn {
+      font-family: "Doto", system-ui;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: transparent;
+      border: 1px solid #ffffff;
+      border-radius: 999px;
+      padding: 0.7rem 1.2rem;
+      cursor: pointer;
+      transition: background 0.25s ease, color 0.25s ease, opacity 0.25s ease;
+    }
+
+    .blog-slider-btn:hover {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    .blog-slider-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
     }
 
     .content-area:last-of-type {
@@ -239,6 +359,15 @@
         align-items: flex-start;
       }
 
+      .blog-card {
+        flex: 0 0 240px;
+        min-height: 200px;
+      }
+
+      .blog-slider-controls {
+        flex-wrap: wrap;
+      }
+
       .footer-left {
         max-width: 100%;
       }
@@ -264,7 +393,14 @@
 
     <main class="hero">
       <section class="content-area">
-        <h2>About me</h2>
+        <div class="about-heading">
+          <h2>About me</h2>
+          <img
+            class="about-avatar"
+            src="/images/me - Kopie.png"
+            alt="Portrait of Jimmy Frosting">
+        </div>
+
         <p>Hi, I’m Jimmy. I’m studying software engineering, and I built this website to improve my skills, share my work, and track my progress as I learn.</p>
         <p>When I’m not coding, I enjoy playing tennis, listening to music, learning languages, and exploring geography, culture, and the world around us. I’m also learning to play guitar.</p>
         <p>This site is where I’ll share technical projects, coursework, and blog posts about things I’m interested in. Hope you enjoy!</p>
@@ -321,12 +457,40 @@
         <h2>Blog</h2>
         <p>Here are some things I have written about (most of them are based on my coursework😂😂):</p>
 
-        <div class="projects-row">
-          <div class="project-box">
-            <a class="project-title" href="/blog/whydatabases.html">Databases</a>
+        <div class="blog-slider-wrap" id="blogSliderWrap">
+          <div class="blog-slider" id="blogSlider">
+            <a class="blog-card" href="/blog/whydatabases.html">
+              <span class="blog-card-title">Databases</span>
+              <span class="blog-card-preview">
+                Every modern app, website, or service you use relies on a database to store and organize information in a way that can be quickly searched and reused.
+              </span>
+            </a>
+
+            <a class="blog-card" href="/blog/foundationsofai.html">
+              <span class="blog-card-title">Foundation AI Mathematics</span>
+              <span class="blog-card-preview">
+                A beginner-friendly look at the mathematical ideas behind AI, including the core concepts that help machine learning models work.
+              </span>
+            </a>
+
+            <a class="blog-card" href="/blog/systems-theory.html">
+              <span class="blog-card-title">Systems Theory</span>
+              <span class="blog-card-preview">
+                A system’s state is the collection of properties it holds at any given moment, while its environment includes any external properties that can influence it.
+              </span>
+            </a>
+
+            <a class="blog-card" href="/blog/database-systems.html">
+              <span class="blog-card-title">Database Systems</span>
+              <span class="blog-card-preview">
+                A database management system manages and controls access to the database itself, while database applications interact with it to store and retrieve data.
+              </span>
+            </a>
           </div>
-          <div class="project-box">
-            <a class="project-title" href="/blog/foundationsofai.html">Foundation AI Mathematics</a>
+
+          <div class="blog-slider-controls">
+            <button type="button" class="blog-slider-btn" id="blogPrev">← Back</button>
+            <button type="button" class="blog-slider-btn" id="blogNext">Next →</button>
           </div>
         </div>
       </section>
@@ -377,14 +541,27 @@
       tick();
     }
 
+    const blogSliderWrap = document.getElementById('blogSliderWrap');
+
+    function revealBlogSlider() {
+      if (blogSliderWrap && !blogSliderWrap.classList.contains('blog-visible')) {
+        blogSliderWrap.classList.add('blog-visible');
+      }
+    }
+
     function runHeroTypewriter(doneAll) {
-      const nodes = document.querySelectorAll('.hero h2, .hero p, .hero .project-title');
+      const nodes = document.querySelectorAll('.hero h2, .hero p, .hero .project-title, .hero .blog-card-title, .hero .blog-card-preview');
       const steps = [];
 
       nodes.forEach(node => {
         const original = node.textContent;
         node.textContent = '';
+
         steps.push(next => {
+          if (node.classList.contains('blog-card-title') || node.classList.contains('blog-card-preview')) {
+            revealBlogSlider();
+          }
+
           typeWriterPlain(node, original, 15, next);
         });
       });
@@ -469,6 +646,32 @@
       }
     });
 
+    const blogSlider = document.getElementById('blogSlider');
+    const blogPrev = document.getElementById('blogPrev');
+    const blogNext = document.getElementById('blogNext');
+
+    function updateBlogButtons() {
+      if (!blogSlider || !blogPrev || !blogNext) return;
+
+      const maxScrollLeft = blogSlider.scrollWidth - blogSlider.clientWidth;
+      blogPrev.disabled = blogSlider.scrollLeft <= 5;
+      blogNext.disabled = blogSlider.scrollLeft >= maxScrollLeft - 5;
+    }
+
+    if (blogPrev && blogNext && blogSlider) {
+      blogPrev.addEventListener('click', () => {
+        blogSlider.scrollBy({ left: -320, behavior: 'smooth' });
+      });
+
+      blogNext.addEventListener('click', () => {
+        blogSlider.scrollBy({ left: 320, behavior: 'smooth' });
+      });
+
+      blogSlider.addEventListener('scroll', updateBlogButtons);
+      window.addEventListener('load', updateBlogButtons);
+      window.addEventListener('resize', updateBlogButtons);
+    }
+
     window.addEventListener('load', () => {
       buildSpans();
       runHeroTypewriter(revealIcons);
@@ -476,3 +679,4 @@
     });
   </script>
 </body>
+</html>
