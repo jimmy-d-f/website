@@ -323,7 +323,7 @@
       color: #ffe4f0;
       text-decoration: none;
       font-size: 1.4rem;
-      opacity: 0;
+      opacity: 1;
       transition: opacity 0.5s;
     }
 
@@ -473,10 +473,31 @@
               </span>
             </a>
 
-            <a class="blog-card" href="/blog/systems-theory.html">
-              <span class="blog-card-title">Systems Theory</span>
+            <a class="blog-card" href="/blog/advancedmodels.html">
+              <span class="blog-card-title">Advanced Models</span>
               <span class="blog-card-preview">
-                A system’s state is the collection of properties it holds at any given moment, while its environment includes any external properties that can influence it.
+                A look at more advanced data and systems models, including how structured approaches help represent complex real-world information.
+              </span>
+            </a>
+
+            <a class="blog-card" href="/blog/data-structure-normalization.html">
+              <span class="blog-card-title">Data Structure Normalization</span>
+              <span class="blog-card-preview">
+                An overview of how normalization helps organize data structures more clearly by reducing repetition and improving consistency.
+              </span>
+            </a>
+
+            <a class="blog-card" href="/blog/database-design-methodology.html">
+              <span class="blog-card-title">Database Design Methodology</span>
+              <span class="blog-card-preview">
+                A practical introduction to planning a database from requirements through structure, helping turn ideas into a reliable data model.
+              </span>
+            </a>
+
+            <a class="blog-card" href="/blog/database-languages-operations.html">
+              <span class="blog-card-title">Database Languages and Operations</span>
+              <span class="blog-card-preview">
+                A summary of the main database languages and operations used to define structures, manage records, and retrieve useful information.
               </span>
             </a>
 
@@ -484,6 +505,55 @@
               <span class="blog-card-title">Database Systems</span>
               <span class="blog-card-preview">
                 A database management system manages and controls access to the database itself, while database applications interact with it to store and retrieve data.
+              </span>
+            </a>
+
+            <a class="blog-card" href="/blog/information-systems.html">
+              <span class="blog-card-title">Information Systems</span>
+              <span class="blog-card-preview">
+                An introduction to information systems and how people, processes, data, and technology work together to support decision-making.
+              </span>
+            </a>
+
+            <a class="blog-card" href="/blog/normalization-normal-forms.html">
+              <span class="blog-card-title">Normalization and Normal Forms</span>
+              <span class="blog-card-preview">
+                A beginner-friendly explanation of normal forms and how they help structure databases to avoid redundancy and update problems.
+              </span>
+            </a>
+
+            <a class="blog-card" href="/blog/nosql-databases.html">
+              <span class="blog-card-title">NoSQL Databases</span>
+              <span class="blog-card-preview">
+                A simple look at NoSQL databases and why flexible, non-relational models are useful for certain kinds of modern applications.
+              </span>
+            </a>
+
+            <a class="blog-card" href="/blog/relational-database-concepts.html">
+              <span class="blog-card-title">Relational Database Concepts</span>
+              <span class="blog-card-preview">
+                A clear introduction to the core ideas behind relational databases, including tables, rows, keys, and relationships.
+              </span>
+            </a>
+
+            <a class="blog-card" href="/blog/relationship-types-er-traps.html">
+              <span class="blog-card-title">Relationship Types and ER Traps</span>
+              <span class="blog-card-preview">
+                An explanation of common relationship types in ER modeling, along with design traps that can cause confusion or inaccurate structures.
+              </span>
+            </a>
+
+            <a class="blog-card" href="/blog/systems-theory.html">
+              <span class="blog-card-title">Systems Theory</span>
+              <span class="blog-card-preview">
+                A system’s state is the collection of properties it holds at any given moment, while its environment includes any external properties that can influence it.
+              </span>
+            </a>
+
+            <a class="blog-card" href="/blog/transactions-concurrency-control.html">
+              <span class="blog-card-title">Transactions and Concurrency Control</span>
+              <span class="blog-card-preview">
+                A guide to how transactions protect data integrity and how concurrency control helps multiple users work safely at the same time.
               </span>
             </a>
           </div>
@@ -529,6 +599,7 @@
     function typeWriterPlain(element, fullText, speed, done) {
       element.textContent = '';
       let i = 0;
+
       function tick() {
         if (i < fullText.length) {
           element.textContent += fullText.charAt(i);
@@ -538,6 +609,7 @@
           done();
         }
       }
+
       tick();
     }
 
@@ -550,6 +622,7 @@
     }
 
     function runHeroTypewriter(doneAll) {
+      const typeSpeed = 20;
       const nodes = document.querySelectorAll('.hero h2, .hero p, .hero .project-title, .hero .blog-card-title, .hero .blog-card-preview');
       const steps = [];
 
@@ -562,11 +635,21 @@
             revealBlogSlider();
           }
 
-          typeWriterPlain(node, original, 15, next);
+          typeWriterPlain(node, original, typeSpeed, () => {
+            if (node.classList.contains('project-title')) {
+              const githubIcon = node.parentElement.querySelector('.project-github');
+              if (githubIcon) {
+                githubIcon.style.opacity = '1';
+              }
+            }
+
+            next();
+          });
         });
       });
 
       let idx = 0;
+
       function runStep() {
         if (idx >= steps.length) {
           if (typeof doneAll === 'function') doneAll();
@@ -577,17 +660,6 @@
       }
 
       runStep();
-    }
-
-    function revealIcons() {
-      document.querySelectorAll('.project-github').forEach(el => {
-        el.style.opacity = '1';
-      });
-      document.querySelectorAll('.footer-left a').forEach((el, i) => {
-        setTimeout(() => {
-          el.style.opacity = '1';
-        }, i * 120);
-      });
     }
 
     const nameEl = document.getElementById('name');
@@ -674,7 +746,7 @@
 
     window.addEventListener('load', () => {
       buildSpans();
-      runHeroTypewriter(revealIcons);
+      runHeroTypewriter();
       colorHeroHeadings();
     });
   </script>
