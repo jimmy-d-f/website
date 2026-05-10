@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/me - Kopie.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/me - Kopie.png">
+
+  <title>Data Structure & Normalization | Jimmy Frosting</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+        content="Understanding data dependencies, normalization process, simple vs nonsimple domains, and how relational databases balance abstraction with performance.">
+  <meta name="author" content="Jimmy Frosting">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Data Structure & Normalization | Jimmy Frosting">
+  <meta property="og:description"
+        content="How normalization eliminates nonsimple domains, why data independence matters, and what universal data sublanguages solve.">
+  <meta property="og:url" content="https://jimmyfrosting.com/blog/data-structure-normalization.html">
+  <meta property="og:site_name" content="Jimmy Frosting">
+  <meta property="og:image" content="https://jimmyfrosting.com/images/me - Kopie.png">
+
+  <link rel="canonical" href="https://jimmyfrosting.com/blog/data-structure-normalization.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --font-body: clamp(1rem, 1.1vw + 0.7rem, 1.1rem);
+      --font-h2: clamp(1.4rem, 1.2vw + 1.1rem, 1.9rem);
+    }
+
+    body {
+      background: #000000;
+      color: #ffffff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      padding-bottom: 60px;
+      padding-left: 10px;
+      padding-right: 100px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .content-area {
+      margin-left: 100px;
+      text-align: left;
+      margin-top: 100px;
+      max-width: 640px;
+    }
+
+    .content-area p {
+      font-family: "Doto", system-ui;
+      font-size: var(--font-body);
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .content-area h2 {
+      font-family: "Doto", system-ui;
+      font-size: var(--font-h2);
+      letter-spacing: 0.12em;
+      margin-top: 1.75rem;
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+    }
+
+    footer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      background: #000000;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Doto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      z-index: 3;
+    }
+
+    .footer-left {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 600px;
+      font-weight: 500;
+    }
+
+    .footer-left a {
+      color: #ffe4f0;
+      text-decoration: none;
+      font-size: 1.4rem;
+    }
+
+    .footer-left a:hover {
+      color: #ffffff;
+    }
+
+    .footer-avatar,
+    .footer-right,
+    .footer-logo {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .content-area {
+        margin-left: 16px;
+        margin-top: 60px;
+        max-width: 100%;
+      }
+
+      .footer-left {
+        max-width: 100%;
+      }
+
+      .footer-left a {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section class="content-area">
+
+      <h2>Data Structure Dependencies</h2>
+      <p>
+        Data can be structured in ways that create fragile dependencies. Ordering dependence means programs rely on records being stored in a specific sequence — change that order and the programs break. Indexing dependence ties programs to specific index numbers; adding or removing indices breaks them. Access-path dependence makes programs follow particular tree or network paths through the data; restructure those paths and everything fails. These dependencies couple applications tightly to physical storage, making maintenance expensive and evolution risky.
+      </p>
+
+      <h2>Simple and Nonsimple Domains</h2>
+      <p>
+        A simple domain is made up of atomic values — individual numbers or strings that cannot be decomposed further. A nonsimple domain is a column in a relation where each value is not a single item but an entire nested table by itself. Nonsimple domains complicate queries, updates, and integrity checking, so relational theory pushes toward eliminating them.
+      </p>
+
+      <h2>Normalization</h2>
+      <p>
+        Normalization is the process of eliminating nonsimple domains and reshaping relations into normal form, where all domains are simple. The method works by copying the parent relation's primary key into each child relation, expanding child keys to include the copied key, and then removing the nonsimple domain from the parent. Repeat this down the tree until every relation is flat.
+      </p>
+      <p>
+        The benefits are practical: normalized data is easy to store and send between systems, requires no pointers or hash-based addresses in the logical view, and simplifies naming because each attribute lives in exactly one place with a clear meaning.
+      </p>
+
+      <h2>Universal Data Sublanguage</h2>
+      <p>
+        A universal data sublanguage is a general way of talking to any relational database, independent of how the data is physically stored inside. SQL grew out of this idea. The sublanguage R handles defining tables, columns, keys, and constraints, as well as writing queries and updates. The host language H deals with files, memory, loops, user interfaces, and other utilities — the normal programming stuff that wraps around database operations.
+      </p>
+
+      <h2>Redundancy</h2>
+      <p>
+        Strong redundancy means a table is one hundred percent predictable from other tables in one fixed way, so you do not need to store it — you can always derive it on demand. Weak redundancy means a table depends on other tables but not in one fixed way forever, so you usually keep it stored to avoid expensive recalculations or because the dependency might change over time.
+      </p>
+
+      <h2>Rule Checking</h2>
+      <p>
+        Integrity rules can be checked continuously — every time data changes — which is slower but catches errors immediately, or periodically in batches, which is faster day to day but means errors are discovered later. The tradeoff is between responsiveness and throughput, and different systems choose different points on that spectrum depending on their workload and tolerance for inconsistency.
+      </p>
+
+      <h2>The DBMS Challenge</h2>
+      <p>
+        The main challenge for any DBMS is turning high-level relational queries — statements about what you want — into fast low-level operations on physical storage, without breaking correctness or sacrificing data independence. Achieving this balance is what separates a good database engine from a slow or brittle one.
+      </p>
+
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-left">
+      <a href="mailto:contact@jimmyfrosting.com" aria-label="Email">
+        <i class="fa-solid fa-envelope"></i>
+      </a>
+
+      <a href="https://www.linkedin.com/in/james-david-frosting/"
+         target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+
+      <a href="https://www.instagram.com/jimmy_frosti/"
+         target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+
+      <a href="https://github.com/jimmy-d-f"
+         target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
+
+      <a href="https://wa.me/353896169208"
+         target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+      </a>
+    </div>
+  </footer>
+
+  <script src="/scripts/typewriter.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      runHeroTypewriterFor('.content-area', { speed: 18 });
+    });
+  </script>
+</body>
+</html>

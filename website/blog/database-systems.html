@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/me - Kopie.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/me - Kopie.png">
+
+  <title>Database Systems: From Files to DBMS | Jimmy Frosting</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+        content="A comprehensive overview of database management systems, file-based approaches, query languages, and the evolution from hierarchical to modern DBMS.">
+  <meta name="author" content="Jimmy Frosting">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Database Systems: From Files to DBMS | Jimmy Frosting">
+  <meta property="og:description"
+        content="Understanding database management systems, their components, evolution, and why they replaced file-based approaches.">
+  <meta property="og:url" content="https://jimmyfrosting.com/blog/database-systems.html">
+  <meta property="og:site_name" content="Jimmy Frosting">
+  <meta property="og:image" content="https://jimmyfrosting.com/images/me - Kopie.png">
+
+  <link rel="canonical" href="https://jimmyfrosting.com/blog/database-systems.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --font-body: clamp(1rem, 1.1vw + 0.7rem, 1.1rem);
+      --font-h2: clamp(1.4rem, 1.2vw + 1.1rem, 1.9rem);
+    }
+
+    body {
+      background: #000000;
+      color: #ffffff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      padding-bottom: 60px;
+      padding-left: 10px;
+      padding-right: 100px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .content-area {
+      margin-left: 100px;
+      text-align: left;
+      margin-top: 100px;
+      max-width: 640px;
+    }
+
+    .content-area p {
+      font-family: "Doto", system-ui;
+      font-size: var(--font-body);
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .content-area h2 {
+      font-family: "Doto", system-ui;
+      font-size: var(--font-h2);
+      letter-spacing: 0.12em;
+      margin-top: 1.75rem;
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+    }
+
+    footer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      background: #000000;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Doto", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      z-index: 3;
+    }
+
+    .footer-left {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 600px;
+      font-weight: 500;
+    }
+
+    .footer-left a {
+      color: #ffe4f0;
+      text-decoration: none;
+      font-size: 1.4rem;
+    }
+
+    .footer-left a:hover {
+      color: #ffffff;
+    }
+
+    .footer-avatar,
+    .footer-right,
+    .footer-logo {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .content-area {
+        margin-left: 16px;
+        margin-top: 60px;
+        max-width: 100%;
+      }
+
+      .footer-left {
+        max-width: 100%;
+      }
+
+      .footer-left a {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section class="content-area">
+
+      <h2>Database Systems</h2>
+      <p>
+        A database management system — DBMS — manages and controls access to the database itself. A database application is any program that interacts with the database at some point, and a database system is the collection of all those applications working together.
+      </p>
+
+      <h2>File-Based Systems</h2>
+      <p>
+        Before databases became standard, file-based systems tried to digitalize paper filing cabinets. Each application program defined and managed its own data to produce reports and services for end users. A file is a collection of records; a record is a collection of logically related fields — in a school system, the students file holds student records, and each record contains one student's ID, name, class, and address.
+      </p>
+      <p>
+        File-based approaches ran into serious problems: data was separated and isolated across different files, often duplicated, and physically dependent on other non-contiguous files. File formats were incompatible between programs, and fixed queries meant you had to write a new application every time you wanted to ask a different question. These limitations pushed the industry toward the database approach.
+      </p>
+
+      <h2>What Makes a Database Different</h2>
+      <p>
+        A database is a self-describing collection of integrated records, meaning it holds metadata about its own structure. In database terminology, individual data points are called attributes, collections of data about a single object are called entities, and entities can have relationships with each other. When you want the database to do something, you send it a query — often written in SQL, the most common query language.
+      </p>
+
+      <h2>Inside a DBMS</h2>
+      <p>
+        Every DBMS includes a Data Definition Language to specify data structures and constraints, and a Data Manipulation Language to insert, modify, or delete data — both are types of SQL. A DBMS also provides view mechanisms that add an extra layer of security, let you customize the user interface, and maintain a consistent picture of the database structure even when the underlying schema changes.
+      </p>
+
+      <h2>Roles in Database Work</h2>
+      <p>
+        Data administrators handle planning, development, and maintenance of the data itself. Database administrators are responsible for the physical realization of the database — hardware, backups, performance tuning. Logical database designers identify what data exists, how entities relate, and what constraints apply. Physical database designers figure out how to turn that logical model into actual tables, indexes, and storage on disk.
+      </p>
+      <p>
+        On the user side, naive users interact with the DBMS without understanding its internal structure — they just use the interface. Sophisticated users know how the system works under the hood and can write their own queries or even tune performance.
+      </p>
+
+      <h2>First-Generation DBMS</h2>
+      <p>
+        Early database management systems started with hierarchical models like GUAM and IBM's IMS, which organized data as trees — perfect for parts and subparts, and well suited to magnetic tape. Charles Bachmann's IDS introduced the network model to handle more complex relationships that didn't fit cleanly into a tree structure. The CODASYL/DBTG group later tried to standardize network databases, introducing concepts like schema, subschema, and separate languages for defining versus manipulating data. Together, hierarchical IMS systems and network CODASYL systems are known as the first generation of DBMSs.
+      </p>
+
+      <h2>Advantages of DBMS</h2>
+      <p>
+        A well-designed DBMS eliminates data redundancy, enforces consistency, and extracts more information from the same amount of data through flexible queries. You get economy of scale, easier sharing across teams, improved integrity and security, and enforced standards. Productivity goes up because developers don't reinvent data-handling logic in every app, and the system can handle concurrent access without conflicts.
+      </p>
+
+      <h2>Disadvantages of DBMS</h2>
+      <p>
+        The tradeoff is complexity: a DBMS is a large, expensive piece of software that requires training and maintenance. Performance can suffer if the system isn't tuned properly, and because everything depends on one central database, a single failure has a much greater impact than losing one file in a file-based system.
+      </p>
+
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-left">
+      <a href="mailto:contact@jimmyfrosting.com" aria-label="Email">
+        <i class="fa-solid fa-envelope"></i>
+      </a>
+
+      <a href="https://www.linkedin.com/in/james-david-frosting/"
+         target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+
+      <a href="https://www.instagram.com/jimmy_frosti/"
+         target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+
+      <a href="https://github.com/jimmy-d-f"
+         target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <i class="fa-brands fa-github"></i>
+      </a>
+
+      <a href="https://wa.me/353896169208"
+         target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+      </a>
+    </div>
+  </footer>
+
+  <script src="/scripts/typewriter.js"></script>
+  <script>
+    window.addEventListener('load', () => {
+      runHeroTypewriterFor('.content-area', { speed: 18 });
+    });
+  </script>
+</body>
+</html>
