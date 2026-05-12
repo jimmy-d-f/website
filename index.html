@@ -19,7 +19,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Software Engineering Student Portfolio | Jimmy Frosting">
   <meta property="og:description"
-        content="Explore projects by Jimmy Frosting, including Linux device drivers, Java CLI tools and games, and a static personal website with typewriter effects.">
+        content="Explore projects by Jimmy Frosting, including Linux device drivers, Java CLI tools and games, and a static personal website.">
   <meta property="og:url" content="https://jimmyfrosting.com/">
   <meta property="og:site_name" content="Jimmy Frosting">
 
@@ -93,6 +93,7 @@
       cursor: pointer;
       transition: color 0.2s;
       line-height: 1.1;
+      min-height: 1.2em;
     }
 
     .site-title .big-letter {
@@ -104,6 +105,7 @@
       font-family: "Jacquard 12 Charted";
       font-size: var(--font-slogan);
       max-width: 380px;
+      min-height: 1.4em;
     }
 
     .hero {
@@ -124,6 +126,7 @@
       letter-spacing: 0.08em;
       margin-bottom: 0.75rem;
       text-transform: uppercase;
+      min-height: 1.3em;
     }
 
     .about-heading {
@@ -152,6 +155,7 @@
       opacity: 0.9;
       margin-bottom: 1.25rem;
       line-height: 1.6;
+      min-height: 1.6em;
     }
 
     .projects-row {
@@ -165,6 +169,14 @@
       align-items: center;
       gap: 0.5rem;
       margin: 0;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .project-box.project-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .project-title {
@@ -228,15 +240,24 @@
       border-radius: 18px;
       text-decoration: none;
       color: #ffffff;
-      display: flex;
+      display: none;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease, background 0.25s ease, color 0.25s ease;
       scroll-snap-align: start;
     }
 
+    .blog-card.blog-card-visible {
+      display: flex;
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
     .blog-card:hover {
-      transform: translateY(-4px);
       background: #ffffff;
       color: #000000;
     }
@@ -385,7 +406,7 @@
       <div class="site-title" id="name">
         Jimmy Frosting
       </div>
-      <div class="site-slogan">
+      <div class="site-slogan typewriter-target">
         Building with <span class="love-word" style="background-color:#ff0000;">love</span> and
         <span class="curiosity-word" style="background-color:#f78400;">curiosity</span>.
       </div>
@@ -394,21 +415,21 @@
     <main class="hero">
       <section class="content-area">
         <div class="about-heading">
-          <h2>About me</h2>
+          <h2 class="typewriter-target">About me</h2>
           <img
             class="about-avatar"
             src="/images/me - Kopie.png"
             alt="Portrait of Jimmy Frosting">
         </div>
 
-        <p>Hi, I’m Jimmy. I’m studying software engineering, and I built this website to improve my skills, share my work, and track my progress as I learn.</p>
-        <p>When I’m not coding, I enjoy playing tennis, listening to music, learning languages, and exploring geography, culture, and the world around us. I’m also learning to play guitar.</p>
-        <p>This site is where I’ll share technical projects, coursework, and blog posts about things I’m interested in. Hope you enjoy!</p>
+        <p class="typewriter-target">Hi, I’m Jimmy. I’m studying software engineering, and I built this website to improve my skills, share my work, and track my progress as I learn.</p>
+        <p class="typewriter-target">When I’m not coding, I enjoy playing tennis, listening to music, learning languages, and exploring geography, culture, and the world around us. I’m also learning to play guitar.</p>
+        <p class="typewriter-target">This site is where I’ll share technical projects, coursework, and blog posts about things I’m interested in. Hope you enjoy!</p>
       </section>
 
       <section class="content-area">
-        <h2>Work</h2>
-        <p>Here are the technological projects I have done so far:</p>
+        <h2 class="typewriter-target">Work</h2>
+        <p class="typewriter-target">Here are the technological projects I have done so far:</p>
 
         <div class="projects-row">
           <div class="project-box">
@@ -454,8 +475,8 @@
       </section>
 
       <section class="content-area">
-        <h2>Blog</h2>
-        <p>Here are some things I have written about (most of them are based on my coursework😂😂):</p>
+        <h2 class="typewriter-target">Blog</h2>
+        <p class="typewriter-target">Here are some things I have written about (most of them are based on my coursework😂😂):</p>
 
         <div class="blog-slider-wrap" id="blogSliderWrap">
           <div class="blog-slider" id="blogSlider">
@@ -596,74 +617,18 @@
   </footer>
 
   <script>
-    function typeWriterPlain(element, fullText, speed, done) {
-      element.textContent = '';
-      let i = 0;
-
-      function tick() {
-        if (i < fullText.length) {
-          element.textContent += fullText.charAt(i);
-          i++;
-          setTimeout(tick, speed);
-        } else if (typeof done === 'function') {
-          done();
-        }
-      }
-
-      tick();
-    }
-
     const blogSliderWrap = document.getElementById('blogSliderWrap');
+    const blogSlider = document.getElementById('blogSlider');
+    const blogPrev = document.getElementById('blogPrev');
+    const blogNext = document.getElementById('blogNext');
+    const nameEl = document.getElementById('name');
+    const originalNameText = nameEl ? nameEl.textContent.trim() : '';
 
     function revealBlogSlider() {
       if (blogSliderWrap && !blogSliderWrap.classList.contains('blog-visible')) {
         blogSliderWrap.classList.add('blog-visible');
       }
     }
-
-    function runHeroTypewriter(doneAll) {
-      const typeSpeed = 20;
-      const nodes = document.querySelectorAll('.hero h2, .hero p, .hero .project-title, .hero .blog-card-title, .hero .blog-card-preview');
-      const steps = [];
-
-      nodes.forEach(node => {
-        const original = node.textContent;
-        node.textContent = '';
-
-        steps.push(next => {
-          if (node.classList.contains('blog-card-title') || node.classList.contains('blog-card-preview')) {
-            revealBlogSlider();
-          }
-
-          typeWriterPlain(node, original, typeSpeed, () => {
-            if (node.classList.contains('project-title')) {
-              const githubIcon = node.parentElement.querySelector('.project-github');
-              if (githubIcon) {
-                githubIcon.style.opacity = '1';
-              }
-            }
-
-            next();
-          });
-        });
-      });
-
-      let idx = 0;
-
-      function runStep() {
-        if (idx >= steps.length) {
-          if (typeof doneAll === 'function') doneAll();
-          return;
-        }
-        const fn = steps[idx++];
-        fn(runStep);
-      }
-
-      runStep();
-    }
-
-    const nameEl = document.getElementById('name');
-    const originalNameText = nameEl ? nameEl.textContent.trim() : '';
 
     function getRandomColor() {
       let letters = "0123456789ABCDEF";
@@ -674,22 +639,200 @@
       return color;
     }
 
-    function buildSpans() {
+    function renderColoredName(text) {
       if (!nameEl) return;
       nameEl.innerHTML = '';
-      for (const ch of originalNameText) {
+
+      for (const ch of text) {
         if (ch === ' ') {
           nameEl.appendChild(document.createTextNode(' '));
           continue;
         }
+
         const span = document.createElement('span');
         span.textContent = ch;
-        if (ch === 'J' || ch === 'F') {
+
+        if (ch.toUpperCase() === 'J' || ch.toUpperCase() === 'F') {
           span.classList.add('big-letter');
         }
+
         span.style.color = getRandomColor();
         nameEl.appendChild(span);
       }
+    }
+
+    function prepareTypewriterTargets() {
+      const targets = [];
+
+      const slogan = document.querySelector('.site-slogan');
+      if (slogan) {
+        targets.push({
+          element: slogan,
+          html: slogan.innerHTML,
+          isName: false
+        });
+      }
+
+      document.querySelectorAll('.typewriter-target').forEach(el => {
+        targets.push({
+          element: el,
+          html: el.innerHTML,
+          isName: false
+        });
+      });
+
+      return targets;
+    }
+
+    function hideTypewriterTargets(targets) {
+      targets.forEach(target => {
+        target.element.innerHTML = '';
+      });
+    }
+
+    function typeHTML(element, html, speed, done) {
+      const temp = document.createElement('div');
+      temp.innerHTML = html;
+      const nodes = Array.from(temp.childNodes);
+      element.innerHTML = '';
+
+      let nodeIndex = 0;
+
+      function typeNextNode() {
+        if (nodeIndex >= nodes.length) {
+          if (typeof done === 'function') done();
+          return;
+        }
+
+        const node = nodes[nodeIndex];
+
+        if (node.nodeType === Node.TEXT_NODE) {
+          const fullText = node.textContent;
+          const textNode = document.createTextNode('');
+          element.appendChild(textNode);
+          let charIndex = 0;
+
+          function typeText() {
+            if (charIndex < fullText.length) {
+              textNode.textContent += fullText.charAt(charIndex);
+              charIndex++;
+              setTimeout(typeText, speed);
+            } else {
+              nodeIndex++;
+              typeNextNode();
+            }
+          }
+
+          typeText();
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          const clone = node.cloneNode(false);
+          element.appendChild(clone);
+
+          const childHTML = node.innerHTML;
+          typeHTML(clone, childHTML, speed, () => {
+            nodeIndex++;
+            typeNextNode();
+          });
+        } else {
+          nodeIndex++;
+          typeNextNode();
+        }
+      }
+
+      typeNextNode();
+    }
+
+    function typeWriterName(text, speed, done) {
+      if (!nameEl) return;
+      nameEl.innerHTML = '';
+      let i = 0;
+
+      function tick() {
+        if (i < text.length) {
+          renderColoredName(text.slice(0, i + 1));
+          i++;
+          setTimeout(tick, speed);
+        } else if (typeof done === 'function') {
+          done();
+        }
+      }
+
+      tick();
+    }
+
+    function runTypewriterSequence(done) {
+      const targets = prepareTypewriterTargets();
+      hideTypewriterTargets(targets);
+
+      const steps = [
+        next => typeWriterName(originalNameText, 120, next),
+        ...targets.map(target => next => typeHTML(target.element, target.html, 20, next))
+      ];
+
+      let idx = 0;
+
+      function runStep() {
+        if (idx >= steps.length) {
+          renderColoredName(originalNameText);
+          if (typeof done === 'function') done();
+          return;
+        }
+
+        steps[idx](runStep);
+        idx++;
+      }
+
+      runStep();
+    }
+
+    function prepareSequentialReveal() {
+      const projectBoxes = document.querySelectorAll('.project-box');
+      const blogCards = document.querySelectorAll('.blog-card');
+      const steps = [];
+
+      projectBoxes.forEach(box => {
+        box.classList.remove('project-visible');
+      });
+
+      blogCards.forEach(card => {
+        card.classList.remove('blog-card-visible');
+      });
+
+      projectBoxes.forEach(box => {
+        steps.push(() => {
+          box.classList.add('project-visible');
+
+          const githubIcon = box.querySelector('.project-github');
+          if (githubIcon) {
+            githubIcon.style.opacity = '1';
+          }
+        });
+      });
+
+      blogCards.forEach(card => {
+        steps.push(() => {
+          revealBlogSlider();
+          card.classList.add('blog-card-visible');
+          updateBlogButtons();
+        });
+      });
+
+      return steps;
+    }
+
+    function runSequentialReveal() {
+      const delay = 2000;
+      const steps = prepareSequentialReveal();
+      let idx = 0;
+
+      function runStep() {
+        if (idx >= steps.length) return;
+        steps[idx]();
+        idx++;
+        setTimeout(runStep, delay);
+      }
+
+      runStep();
     }
 
     if (nameEl) {
@@ -701,7 +844,7 @@
       });
 
       nameEl.addEventListener('mouseleave', () => {
-        buildSpans();
+        renderColoredName(originalNameText);
       });
     }
 
@@ -717,10 +860,6 @@
         e.target.style.color = getRandomColor();
       }
     });
-
-    const blogSlider = document.getElementById('blogSlider');
-    const blogPrev = document.getElementById('blogPrev');
-    const blogNext = document.getElementById('blogNext');
 
     function updateBlogButtons() {
       if (!blogSlider || !blogPrev || !blogNext) return;
@@ -745,9 +884,10 @@
     }
 
     window.addEventListener('load', () => {
-      buildSpans();
-      runHeroTypewriter();
       colorHeroHeadings();
+      runTypewriterSequence(() => {
+        runSequentialReveal();
+      });
     });
   </script>
 </body>
