@@ -105,7 +105,6 @@
       font-family: "Jacquard 12 Charted";
       font-size: var(--font-slogan);
       max-width: 380px;
-      min-height: 1.4em;
     }
 
     .hero {
@@ -240,21 +239,22 @@
       border-radius: 18px;
       text-decoration: none;
       color: #ffffff;
-      display: none;
+      display: flex;
       flex-direction: column;
       justify-content: space-between;
       opacity: 0;
       visibility: hidden;
-      transform: translateY(10px);
-      transition: opacity 0.4s ease, transform 0.4s ease, background 0.25s ease, color 0.25s ease;
+      pointer-events: none;
+      transform: translateX(80px);
+      transition: opacity 1s ease, transform 1s ease, background 0.25s ease, color 0.25s ease;
       scroll-snap-align: start;
     }
 
     .blog-card.blog-card-visible {
-      display: flex;
       opacity: 1;
       visibility: visible;
-      transform: translateY(0);
+      pointer-events: auto;
+      transform: translateX(0);
     }
 
     .blog-card:hover {
@@ -406,7 +406,7 @@
       <div class="site-title" id="name">
         Jimmy Frosting
       </div>
-      <div class="site-slogan typewriter-target">
+      <div class="site-slogan">
         Building with <span class="love-word" style="background-color:#ff0000;">love</span> and
         <span class="curiosity-word" style="background-color:#f78400;">curiosity</span>.
       </div>
@@ -661,35 +661,6 @@
       }
     }
 
-    function prepareTypewriterTargets() {
-      const targets = [];
-
-      const slogan = document.querySelector('.site-slogan');
-      if (slogan) {
-        targets.push({
-          element: slogan,
-          html: slogan.innerHTML,
-          isName: false
-        });
-      }
-
-      document.querySelectorAll('.typewriter-target').forEach(el => {
-        targets.push({
-          element: el,
-          html: el.innerHTML,
-          isName: false
-        });
-      });
-
-      return targets;
-    }
-
-    function hideTypewriterTargets(targets) {
-      targets.forEach(target => {
-        target.element.innerHTML = '';
-      });
-    }
-
     function typeHTML(element, html, speed, done) {
       const temp = document.createElement('div');
       temp.innerHTML = html;
@@ -742,110 +713,12 @@
       typeNextNode();
     }
 
-    function typeWriterName(text, speed, done) {
-      if (!nameEl) return;
-      nameEl.innerHTML = '';
-      let i = 0;
+    function updateBlogButtons() {
+      if (!blogSlider || !blogPrev || !blogNext) return;
 
-      function tick() {
-        if (i < text.length) {
-          renderColoredName(text.slice(0, i + 1));
-          i++;
-          setTimeout(tick, speed);
-        } else if (typeof done === 'function') {
-          done();
-        }
-      }
-
-      tick();
-    }
-
-    function runTypewriterSequence(done) {
-      const targets = prepareTypewriterTargets();
-      hideTypewriterTargets(targets);
-
-      const steps = [
-        next => typeWriterName(originalNameText, 120, next),
-        ...targets.map(target => next => typeHTML(target.element, target.html, 20, next))
-      ];
-
-      let idx = 0;
-
-      function runStep() {
-        if (idx >= steps.length) {
-          renderColoredName(originalNameText);
-          if (typeof done === 'function') done();
-          return;
-        }
-
-        steps[idx](runStep);
-        idx++;
-      }
-
-      runStep();
-    }
-
-    function prepareSequentialReveal() {
-      const projectBoxes = document.querySelectorAll('.project-box');
-      const blogCards = document.querySelectorAll('.blog-card');
-      const steps = [];
-
-      projectBoxes.forEach(box => {
-        box.classList.remove('project-visible');
-      });
-
-      blogCards.forEach(card => {
-        card.classList.remove('blog-card-visible');
-      });
-
-      projectBoxes.forEach(box => {
-        steps.push(() => {
-          box.classList.add('project-visible');
-
-          const githubIcon = box.querySelector('.project-github');
-          if (githubIcon) {
-            githubIcon.style.opacity = '1';
-          }
-        });
-      });
-
-      blogCards.forEach(card => {
-        steps.push(() => {
-          revealBlogSlider();
-          card.classList.add('blog-card-visible');
-          updateBlogButtons();
-        });
-      });
-
-      return steps;
-    }
-
-    function runSequentialReveal() {
-      const delay = 2000;
-      const steps = prepareSequentialReveal();
-      let idx = 0;
-
-      function runStep() {
-        if (idx >= steps.length) return;
-        steps[idx]();
-        idx++;
-        setTimeout(runStep, delay);
-      }
-
-      runStep();
-    }
-
-    if (nameEl) {
-      nameEl.addEventListener('mouseenter', () => {
-        const spans = nameEl.querySelectorAll('span');
-        spans.forEach(span => {
-          span.style.color = getRandomColor();
-        });
-      });
-
-      nameEl.addEventListener('mouseleave', () => {
-        renderColoredName(originalNameText);
-      });
+      const maxScrollLeft = blogSlider.scrollWidth - blogSlider.clientWidth;
+      blogPrev.disabled = blogSlider.scrollLeft <= 5;
+      blogNext.disabled = blogSlider.scrollLeft >= maxScrollLeft - 5;
     }
 
     function colorHeroHeadings() {
@@ -861,12 +734,19 @@
       }
     });
 
-    function updateBlogButtons() {
-      if (!blogSlider || !blogPrev || !blogNext) return;
+    if (nameEl) {
+      renderColoredName(originalNameText);
 
-      const maxScrollLeft = blogSlider.scrollWidth - blogSlider.clientWidth;
-      blogPrev.disabled = blogSlider.scrollLeft <= 5;
-      blogNext.disabled = blogSlider.scrollLeft >= maxScrollLeft - 5;
+      nameEl.addEventListener('mouseenter', () => {
+        const spans = nameEl.querySelectorAll('span');
+        spans.forEach(span => {
+          span.style.color = getRandomColor();
+        });
+      });
+
+      nameEl.addEventListener('mouseleave', () => {
+        renderColoredName(originalNameText);
+      });
     }
 
     if (blogPrev && blogNext && blogSlider) {
@@ -883,11 +763,122 @@
       window.addEventListener('resize', updateBlogButtons);
     }
 
+    function buildTimeline() {
+      const typingSpeed = 20;
+      const workRevealDelay = 500;
+      const blogRevealDelay = 2000;
+      const steps = [];
+
+      const allTargets = document.querySelectorAll('.typewriter-target');
+      const aboutHeading = allTargets[0];
+      const aboutP1 = allTargets[1];
+      const aboutP2 = allTargets[2];
+      const aboutP3 = allTargets[3];
+      const workHeading = allTargets[4];
+      const workParagraph = allTargets[5];
+      const blogHeading = allTargets[6];
+      const blogParagraph = allTargets[7];
+
+      const projectBoxes = document.querySelectorAll('.project-box');
+      const blogCards = document.querySelectorAll('.blog-card');
+
+      const typingTargets = [
+        aboutHeading,
+        aboutP1,
+        aboutP2,
+        aboutP3,
+        workHeading,
+        workParagraph,
+        blogHeading,
+        blogParagraph
+      ];
+
+      typingTargets.forEach(el => {
+        if (el) {
+          el.dataset.originalHtml = el.innerHTML;
+          el.innerHTML = '';
+        }
+      });
+
+      projectBoxes.forEach(box => {
+        box.classList.remove('project-visible');
+        const githubIcon = box.querySelector('.project-github');
+        if (githubIcon) githubIcon.style.opacity = '0';
+      });
+
+      blogCards.forEach(card => {
+        card.classList.remove('blog-card-visible');
+      });
+
+      if (aboutHeading) {
+        steps.push(next => typeHTML(aboutHeading, aboutHeading.dataset.originalHtml, typingSpeed, next));
+      }
+
+      if (aboutP1) {
+        steps.push(next => typeHTML(aboutP1, aboutP1.dataset.originalHtml, typingSpeed, next));
+      }
+
+      if (aboutP2) {
+        steps.push(next => typeHTML(aboutP2, aboutP2.dataset.originalHtml, typingSpeed, next));
+      }
+
+      if (aboutP3) {
+        steps.push(next => typeHTML(aboutP3, aboutP3.dataset.originalHtml, typingSpeed, next));
+      }
+
+      if (workHeading) {
+        steps.push(next => typeHTML(workHeading, workHeading.dataset.originalHtml, typingSpeed, next));
+      }
+
+      if (workParagraph) {
+        steps.push(next => typeHTML(workParagraph, workParagraph.dataset.originalHtml, typingSpeed, next));
+      }
+
+      projectBoxes.forEach(box => {
+        steps.push(next => {
+          box.classList.add('project-visible');
+          const githubIcon = box.querySelector('.project-github');
+          if (githubIcon) githubIcon.style.opacity = '1';
+          setTimeout(next, workRevealDelay);
+        });
+      });
+
+      if (blogHeading) {
+        steps.push(next => typeHTML(blogHeading, blogHeading.dataset.originalHtml, typingSpeed, next));
+      }
+
+      if (blogParagraph) {
+        steps.push(next => typeHTML(blogParagraph, blogParagraph.dataset.originalHtml, typingSpeed, next));
+      }
+
+      blogCards.forEach(card => {
+        steps.push(next => {
+          revealBlogSlider();
+          card.classList.add('blog-card-visible');
+          updateBlogButtons();
+          setTimeout(next, blogRevealDelay);
+        });
+      });
+
+      return steps;
+    }
+
+    function runTimeline() {
+      const steps = buildTimeline();
+      let idx = 0;
+
+      function next() {
+        if (idx >= steps.length) return;
+        const step = steps[idx++];
+        step(next);
+      }
+
+      next();
+    }
+
     window.addEventListener('load', () => {
       colorHeroHeadings();
-      runTypewriterSequence(() => {
-        runSequentialReveal();
-      });
+      runTimeline();
     });
   </script>
 </body>
