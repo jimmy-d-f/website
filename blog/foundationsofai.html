@@ -87,7 +87,6 @@
       text-transform: uppercase;
     }
 
-    /* All sections and images hidden until typewriter reaches them */
     .content-area,
     .img-reveal {
       visibility: hidden;
@@ -199,6 +198,7 @@
       .img-reveal {
         visibility: visible;
       }
+
       .img-reveal img {
         transform: none;
         opacity: 1;
@@ -334,23 +334,17 @@
   </footer>
 
   <script>
-    // Collects all main children in order: sections and img-reveals
     const blocks = Array.from(document.querySelector('main').children);
-    const SPEED = 18; // ms per character
+    const SPEED = 18;
 
-    // Extract full text + structure from a section, then retype it character by character
     function typeSection(section, onDone) {
-      // Save original HTML, clear the section
       const originalHTML = section.innerHTML;
       section.innerHTML = '';
       section.classList.add('typing');
-      section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-      // Build a flat list of {node, text} to type out
       const temp = document.createElement('div');
       temp.innerHTML = originalHTML;
 
-      // We'll retype by reconstructing nodes
       const allNodes = [];
       function collectNodes(parent, targetParent) {
         parent.childNodes.forEach(child => {
@@ -360,19 +354,16 @@
             const clone = document.createElement(child.tagName);
             Array.from(child.attributes).forEach(a => clone.setAttribute(a.name, a.value));
             targetParent.appendChild(clone);
-            allNodes.push({ type: 'element_start', element: clone });
             collectNodes(child, clone);
           }
         });
       }
       collectNodes(temp, section);
 
-      // Flatten all text into a single character stream with node references
       const charStream = [];
-      let currentTextNode = null;
       allNodes.forEach(node => {
         if (node.type === 'text') {
-          currentTextNode = document.createTextNode('');
+          const currentTextNode = document.createTextNode('');
           node.parent.appendChild(currentTextNode);
           for (const ch of node.text) {
             charStream.push({ textNode: currentTextNode, char: ch });
@@ -397,12 +388,9 @@
 
     function revealImage(imgReveal, onDone) {
       imgReveal.classList.add('visible');
-      imgReveal.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      // Wait for the CSS transition to finish (700ms) then continue
       setTimeout(onDone, 750);
     }
 
-    // Run all blocks in sequence
     function runSequence(index) {
       if (index >= blocks.length) return;
       const block = blocks[index];

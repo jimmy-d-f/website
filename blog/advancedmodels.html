@@ -305,7 +305,6 @@
       const originalHTML = section.innerHTML;
       section.innerHTML = '';
       section.classList.add('typing');
-      section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
       const temp = document.createElement('div');
       temp.innerHTML = originalHTML;
@@ -353,7 +352,6 @@
 
     function revealImage(imgReveal, onDone) {
       imgReveal.classList.add('visible');
-      imgReveal.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       setTimeout(onDone, 750);
     }
 
