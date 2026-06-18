@@ -358,6 +358,79 @@
       display: none;
     }
 
+    .collapsible-banner,
+    .blog-group-banner {
+      border: 1px solid #ffffff;
+      border-radius: 18px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .banner-toggle,
+    .blog-group-toggle {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-family: "Doto", system-ui;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 1rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.25s ease;
+    }
+
+    .banner-toggle:hover,
+    .blog-group-toggle:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .banner-arrow {
+      font-size: 1.1rem;
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .banner-arrow.open {
+      transform: rotate(180deg);
+    }
+
+    .banner-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      padding: 0 1.25rem;
+    }
+
+    .banner-body.open {
+      max-height: 400px;
+      padding: 1rem 1.25rem;
+    }
+
+    .banner-body p {
+      margin-bottom: 0.75rem;
+    }
+
+    .banner-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .blog-group-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, padding 0.5s ease;
+      padding: 0 1.25rem;
+    }
+
+    .blog-group-body.open {
+      max-height: 600px;
+      padding: 1rem 1.25rem;
+    }
+
     @media (max-width: 600px) {
       body {
         padding-left: 16px;
@@ -422,9 +495,25 @@
             alt="Portrait of Jimmy Frosting">
         </div>
 
-        <p class="typewriter-target">Hi, I’m Jimmy. I’m studying software engineering, and I built this website to improve my skills, share my work, and track my progress as I learn.</p>
-        <p class="typewriter-target">When I’m not coding, I enjoy playing tennis, listening to music, learning languages, and exploring geography, culture, and the world around us. I’m also learning to play guitar.</p>
-        <p class="typewriter-target">This site is where I’ll share technical projects, coursework, and blog posts about things I’m interested in. Hope you enjoy!</p>
+        <div class="collapsible-banner">
+          <button class="banner-toggle" onclick="toggleBanner(this)">
+            <span>Who I am</span>
+            <span class="banner-arrow">▾</span>
+          </button>
+          <div class="banner-body">
+            <p>Hi, I'm Jimmy. I'm studying software engineering, and I built this website to improve my skills, share my work, and track my progress as I learn.</p>
+          </div>
+        </div>
+
+        <div class="collapsible-banner">
+          <button class="banner-toggle" onclick="toggleBanner(this)">
+            <span>What I do</span>
+            <span class="banner-arrow">▾</span>
+          </button>
+          <div class="banner-body">
+            <p>When I'm not coding, I enjoy playing tennis, listening to music, learning languages, and exploring geography, culture, and the world around us. I'm also learning to play guitar.</p>
+          </div>
+        </div>
       </section>
 
       <section class="content-area">
@@ -479,110 +568,121 @@
         <p class="typewriter-target">Here are some things I have written about (most of them are based on my coursework😂😂):</p>
 
         <div class="blog-slider-wrap" id="blogSliderWrap">
-          <div class="blog-slider" id="blogSlider">
-            <a class="blog-card" href="/blog/whydatabases.html">
-              <span class="blog-card-title">Databases</span>
-              <span class="blog-card-preview">
-                Every modern app, website, or service you use relies on a database to store and organize information in a way that can be quickly searched and reused.
-              </span>
-            </a>
 
-            <a class="blog-card" href="/blog/foundationsofai.html">
-              <span class="blog-card-title">Foundation AI Mathematics</span>
-              <span class="blog-card-preview">
-                A beginner-friendly look at the mathematical ideas behind AI, including the core concepts that help machine learning models work.
-              </span>
-            </a>
-
-            <a class="blog-card" href="/blog/advancedmodels.html">
-              <span class="blog-card-title">Advanced Models</span>
-              <span class="blog-card-preview">
-                A look at more advanced data and systems models, including how structured approaches help represent complex real-world information.
-              </span>
-            </a>
-
-            <a class="blog-card" href="/blog/data-structure-normalization.html">
-              <span class="blog-card-title">Data Structure Normalization</span>
-              <span class="blog-card-preview">
-                An overview of how normalization helps organize data structures more clearly by reducing repetition and improving consistency.
-              </span>
-            </a>
-
-            <a class="blog-card" href="/blog/database-design-methodology.html">
-              <span class="blog-card-title">Database Design Methodology</span>
-              <span class="blog-card-preview">
-                A practical introduction to planning a database from requirements through structure, helping turn ideas into a reliable data model.
-              </span>
-            </a>
-
-            <a class="blog-card" href="/blog/database-languages-operations.html">
-              <span class="blog-card-title">Database Languages and Operations</span>
-              <span class="blog-card-preview">
-                A summary of the main database languages and operations used to define structures, manage records, and retrieve useful information.
-              </span>
-            </a>
-
-            <a class="blog-card" href="/blog/database-systems.html">
-              <span class="blog-card-title">Database Systems</span>
-              <span class="blog-card-preview">
-                A database management system manages and controls access to the database itself, while database applications interact with it to store and retrieve data.
-              </span>
-            </a>
-
-            <a class="blog-card" href="/blog/information-systems.html">
-              <span class="blog-card-title">Information Systems</span>
-              <span class="blog-card-preview">
-                An introduction to information systems and how people, processes, data, and technology work together to support decision-making.
-              </span>
-            </a>
-
-            <a class="blog-card" href="/blog/normalization-normal-forms.html">
-              <span class="blog-card-title">Normalization and Normal Forms</span>
-              <span class="blog-card-preview">
-                A beginner-friendly explanation of normal forms and how they help structure databases to avoid redundancy and update problems.
-              </span>
-            </a>
-
-            <a class="blog-card" href="/blog/nosql-databases.html">
-              <span class="blog-card-title">NoSQL Databases</span>
-              <span class="blog-card-preview">
-                A simple look at NoSQL databases and why flexible, non-relational models are useful for certain kinds of modern applications.
-              </span>
-            </a>
-
-            <a class="blog-card" href="/blog/relational-database-concepts.html">
-              <span class="blog-card-title">Relational Database Concepts</span>
-              <span class="blog-card-preview">
-                A clear introduction to the core ideas behind relational databases, including tables, rows, keys, and relationships.
-              </span>
-            </a>
-
-            <a class="blog-card" href="/blog/relationship-types-er-traps.html">
-              <span class="blog-card-title">Relationship Types and ER Traps</span>
-              <span class="blog-card-preview">
-                An explanation of common relationship types in ER modeling, along with design traps that can cause confusion or inaccurate structures.
-              </span>
-            </a>
-
-            <a class="blog-card" href="/blog/systems-theory.html">
-              <span class="blog-card-title">Systems Theory</span>
-              <span class="blog-card-preview">
-                A system’s state is the collection of properties it holds at any given moment, while its environment includes any external properties that can influence it.
-              </span>
-            </a>
-
-            <a class="blog-card" href="/blog/transactions-concurrency-control.html">
-              <span class="blog-card-title">Transactions and Concurrency Control</span>
-              <span class="blog-card-preview">
-                A guide to how transactions protect data integrity and how concurrency control helps multiple users work safely at the same time.
-              </span>
-            </a>
+          <div class="blog-group-banner" id="groupPersonal">
+            <button class="blog-group-toggle" onclick="toggleGroup('groupPersonal')">
+              <span>Personal Projects</span>
+              <span class="banner-arrow">▾</span>
+            </button>
+            <div class="blog-group-body">
+              <div class="blog-slider" id="blogSliderPersonal">
+                <a class="blog-card" href="/blog/systems-theory.html">
+                  <span class="blog-card-title">Systems Theory</span>
+                  <span class="blog-card-preview">
+                    A system's state is the collection of properties it holds at any given moment, while its environment includes any external properties that can influence it.
+                  </span>
+                </a>
+                <a class="blog-card" href="/blog/information-systems.html">
+                  <span class="blog-card-title">Information Systems</span>
+                  <span class="blog-card-preview">
+                    An introduction to information systems and how people, processes, data, and technology work together to support decision-making.
+                  </span>
+                </a>
+                <a class="blog-card" href="/blog/advancedmodels.html">
+                  <span class="blog-card-title">Advanced Models</span>
+                  <span class="blog-card-preview">
+                    A look at more advanced data and systems models, including how structured approaches help represent complex real-world information.
+                  </span>
+                </a>
+              </div>
+              <div class="blog-slider-controls">
+                <button type="button" class="blog-slider-btn" onclick="slideGroup('blogSliderPersonal', -320)">← Back</button>
+                <button type="button" class="blog-slider-btn" onclick="slideGroup('blogSliderPersonal', 320)">Next →</button>
+              </div>
+            </div>
           </div>
 
-          <div class="blog-slider-controls">
-            <button type="button" class="blog-slider-btn" id="blogPrev">← Back</button>
-            <button type="button" class="blog-slider-btn" id="blogNext">Next →</button>
+          <div class="blog-group-banner" id="groupSchool">
+            <button class="blog-group-toggle" onclick="toggleGroup('groupSchool')">
+              <span>School Work</span>
+              <span class="banner-arrow">▾</span>
+            </button>
+            <div class="blog-group-body">
+              <div class="blog-slider" id="blogSliderSchool">
+                <a class="blog-card" href="/blog/whydatabases.html">
+                  <span class="blog-card-title">Databases</span>
+                  <span class="blog-card-preview">
+                    Every modern app, website, or service you use relies on a database to store and organize information in a way that can be quickly searched and reused.
+                  </span>
+                </a>
+                <a class="blog-card" href="/blog/foundationsofai.html">
+                  <span class="blog-card-title">Foundation AI Mathematics</span>
+                  <span class="blog-card-preview">
+                    A beginner-friendly look at the mathematical ideas behind AI, including the core concepts that help machine learning models work.
+                  </span>
+                </a>
+                <a class="blog-card" href="/blog/data-structure-normalization.html">
+                  <span class="blog-card-title">Data Structure Normalization</span>
+                  <span class="blog-card-preview">
+                    An overview of how normalization helps organize data structures more clearly by reducing repetition and improving consistency.
+                  </span>
+                </a>
+                <a class="blog-card" href="/blog/database-design-methodology.html">
+                  <span class="blog-card-title">Database Design Methodology</span>
+                  <span class="blog-card-preview">
+                    A practical introduction to planning a database from requirements through structure, helping turn ideas into a reliable data model.
+                  </span>
+                </a>
+                <a class="blog-card" href="/blog/database-languages-operations.html">
+                  <span class="blog-card-title">Database Languages and Operations</span>
+                  <span class="blog-card-preview">
+                    A summary of the main database languages and operations used to define structures, manage records, and retrieve useful information.
+                  </span>
+                </a>
+                <a class="blog-card" href="/blog/database-systems.html">
+                  <span class="blog-card-title">Database Systems</span>
+                  <span class="blog-card-preview">
+                    A database management system manages and controls access to the database itself, while database applications interact with it to store and retrieve data.
+                  </span>
+                </a>
+                <a class="blog-card" href="/blog/normalization-normal-forms.html">
+                  <span class="blog-card-title">Normalization and Normal Forms</span>
+                  <span class="blog-card-preview">
+                    A beginner-friendly explanation of normal forms and how they help structure databases to avoid redundancy and update problems.
+                  </span>
+                </a>
+                <a class="blog-card" href="/blog/nosql-databases.html">
+                  <span class="blog-card-title">NoSQL Databases</span>
+                  <span class="blog-card-preview">
+                    A simple look at NoSQL databases and why flexible, non-relational models are useful for certain kinds of modern applications.
+                  </span>
+                </a>
+                <a class="blog-card" href="/blog/relational-database-concepts.html">
+                  <span class="blog-card-title">Relational Database Concepts</span>
+                  <span class="blog-card-preview">
+                    A clear introduction to the core ideas behind relational databases, including tables, rows, keys, and relationships.
+                  </span>
+                </a>
+                <a class="blog-card" href="/blog/relationship-types-er-traps.html">
+                  <span class="blog-card-title">Relationship Types and ER Traps</span>
+                  <span class="blog-card-preview">
+                    An explanation of common relationship types in ER modeling, along with design traps that can cause confusion or inaccurate structures.
+                  </span>
+                </a>
+                <a class="blog-card" href="/blog/transactions-concurrency-control.html">
+                  <span class="blog-card-title">Transactions and Concurrency Control</span>
+                  <span class="blog-card-preview">
+                    A guide to how transactions protect data integrity and how concurrency control helps multiple users work safely at the same time.
+                  </span>
+                </a>
+              </div>
+              <div class="blog-slider-controls">
+                <button type="button" class="blog-slider-btn" onclick="slideGroup('blogSliderSchool', -320)">← Back</button>
+                <button type="button" class="blog-slider-btn" onclick="slideGroup('blogSliderSchool', 320)">Next →</button>
+              </div>
+            </div>
           </div>
+
         </div>
       </section>
     </main>
@@ -618,11 +718,28 @@
 
   <script>
     const blogSliderWrap = document.getElementById('blogSliderWrap');
-    const blogSlider = document.getElementById('blogSlider');
-    const blogPrev = document.getElementById('blogPrev');
-    const blogNext = document.getElementById('blogNext');
     const nameEl = document.getElementById('name');
     const originalNameText = nameEl ? nameEl.textContent.trim() : '';
+
+    function toggleBanner(btn) {
+      const body = btn.nextElementSibling;
+      const arrow = btn.querySelector('.banner-arrow');
+      body.classList.toggle('open');
+      arrow.classList.toggle('open');
+    }
+
+    function toggleGroup(id) {
+      const group = document.getElementById(id);
+      const body = group.querySelector('.blog-group-body');
+      const arrow = group.querySelector('.banner-arrow');
+      body.classList.toggle('open');
+      arrow.classList.toggle('open');
+    }
+
+    function slideGroup(sliderId, amount) {
+      const el = document.getElementById(sliderId);
+      if (el) el.scrollBy({ left: amount, behavior: 'smooth' });
+    }
 
     function revealBlogSlider() {
       if (blogSliderWrap && !blogSliderWrap.classList.contains('blog-visible')) {
@@ -713,14 +830,6 @@
       typeNextNode();
     }
 
-    function updateBlogButtons() {
-      if (!blogSlider || !blogPrev || !blogNext) return;
-
-      const maxScrollLeft = blogSlider.scrollWidth - blogSlider.clientWidth;
-      blogPrev.disabled = blogSlider.scrollLeft <= 5;
-      blogNext.disabled = blogSlider.scrollLeft >= maxScrollLeft - 5;
-    }
-
     function colorHeroHeadings() {
       const headings = document.querySelectorAll('.hero h2');
       headings.forEach(h => {
@@ -749,20 +858,6 @@
       });
     }
 
-    if (blogPrev && blogNext && blogSlider) {
-      blogPrev.addEventListener('click', () => {
-        blogSlider.scrollBy({ left: -320, behavior: 'smooth' });
-      });
-
-      blogNext.addEventListener('click', () => {
-        blogSlider.scrollBy({ left: 320, behavior: 'smooth' });
-      });
-
-      blogSlider.addEventListener('scroll', updateBlogButtons);
-      window.addEventListener('load', updateBlogButtons);
-      window.addEventListener('resize', updateBlogButtons);
-    }
-
     function buildTimeline() {
       const typingSpeed = 20;
       const workRevealDelay = 500;
@@ -771,22 +866,16 @@
 
       const allTargets = document.querySelectorAll('.typewriter-target');
       const aboutHeading = allTargets[0];
-      const aboutP1 = allTargets[1];
-      const aboutP2 = allTargets[2];
-      const aboutP3 = allTargets[3];
-      const workHeading = allTargets[4];
-      const workParagraph = allTargets[5];
-      const blogHeading = allTargets[6];
-      const blogParagraph = allTargets[7];
+      const workHeading = allTargets[1];
+      const workParagraph = allTargets[2];
+      const blogHeading = allTargets[3];
+      const blogParagraph = allTargets[4];
 
       const projectBoxes = document.querySelectorAll('.project-box');
       const blogCards = document.querySelectorAll('.blog-card');
 
       const typingTargets = [
         aboutHeading,
-        aboutP1,
-        aboutP2,
-        aboutP3,
         workHeading,
         workParagraph,
         blogHeading,
@@ -812,18 +901,6 @@
 
       if (aboutHeading) {
         steps.push(next => typeHTML(aboutHeading, aboutHeading.dataset.originalHtml, typingSpeed, next));
-      }
-
-      if (aboutP1) {
-        steps.push(next => typeHTML(aboutP1, aboutP1.dataset.originalHtml, typingSpeed, next));
-      }
-
-      if (aboutP2) {
-        steps.push(next => typeHTML(aboutP2, aboutP2.dataset.originalHtml, typingSpeed, next));
-      }
-
-      if (aboutP3) {
-        steps.push(next => typeHTML(aboutP3, aboutP3.dataset.originalHtml, typingSpeed, next));
       }
 
       if (workHeading) {
@@ -855,7 +932,6 @@
         steps.push(next => {
           revealBlogSlider();
           card.classList.add('blog-card-visible');
-          updateBlogButtons();
           setTimeout(next, blogRevealDelay);
         });
       });
